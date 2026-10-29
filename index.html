@@ -279,7 +279,9 @@
         titulo: "Mentalidad AI-First e Ingeniería de Prompts (C-T-D-E)",
         desc: "Aprende la anatomía de una app WebGIS y domina la fórmula Contexto-Tecnología-Datos-Estilo para que Claude o Gemini generen código cartográfico funcional al primer intento.",
         guia: "./modulos/modulo-1-prompts-fundamentos/README.md",
-        demo: "./modulos/modulo-1-prompts-fundamentos/visor-basico-selper.html"
+        demo: "./modulos/modulo-1-prompts-fundamentos/visor-basico-selper.html",
+        slidesHtml: "./modulos/modulo-1-prompts-fundamentos/presentacion-modulo-1.html",
+        slidesPptx: "./modulos/modulo-1-prompts-fundamentos/presentacion-modulo-1.pptx"
       },
       {
         id: "m2",
@@ -288,7 +290,9 @@
         titulo: "Visores Interactivos con HTML, JS y Leaflet",
         desc: "Capas base satelitales, conexión a servicios WMS oficiales (IGAC/IDEAM) con control de transparencia, agrupación MarkerCluster y mapas coropléticos con leyenda dinámica.",
         guia: "./modulos/modulo-2-visores-leaflet/README.md",
-        demo: "./modulos/modulo-2-visores-leaflet/visor-catastral-ambiental.html"
+        demo: "./modulos/modulo-2-visores-leaflet/visor-catastral-ambiental.html",
+        slidesHtml: "./modulos/modulo-2-visores-leaflet/presentacion-modulo-2.html",
+        slidesPptx: "./modulos/modulo-2-visores-leaflet/presentacion-modulo-2.pptx"
       },
       {
         id: "m3",
@@ -297,7 +301,9 @@
         titulo: "Automatización de Datos y Mapas con Python + IA",
         desc: "Usa Python y GeoPandas sin miedo para reproyectar de MAGNA-SIRGAS (EPSG:9377) a WGS84 (EPSG:4326), simplificar Shapefiles y crear comparadores satelitales Split-Map.",
         guia: "./modulos/modulo-3-python-geodatos/README.md",
-        demo: "./modulos/modulo-3-python-geodatos/comparador-satelital-split.html"
+        demo: "./modulos/modulo-3-python-geodatos/comparador-satelital-split.html",
+        slidesHtml: "./modulos/modulo-3-python-geodatos/presentacion-modulo-3.html",
+        slidesPptx: "./modulos/modulo-3-python-geodatos/presentacion-modulo-3.pptx"
       },
       {
         id: "m4",
@@ -306,7 +312,9 @@
         titulo: "Dashboards Geográficos (Leaflet + Chart.js + Turf.js)",
         desc: "Conecta mapas interactivos con 4 tarjetas KPI, gráficos estadísticos sincronizados y cálculo de áreas de afectación (buffers) en tiempo real desde el navegador.",
         guia: "./modulos/modulo-4-dashboards-geograficos/README.md",
-        demo: "./modulos/modulo-4-dashboards-geograficos/dashboard-riesgo-territorio.html"
+        demo: "./modulos/modulo-4-dashboards-geograficos/dashboard-riesgo-territorio.html",
+        slidesHtml: "./modulos/modulo-4-dashboards-geograficos/presentacion-modulo-4.html",
+        slidesPptx: "./modulos/modulo-4-dashboards-geograficos/presentacion-modulo-4.pptx"
       },
       {
         id: "m5",
@@ -315,7 +323,9 @@
         titulo: "Aplicaciones Web Analíticas con Python y Streamlit",
         desc: "Construye aplicaciones donde cualquier usuario pueda subir un archivo CSV o GeoJSON de campo y obtener mapas 2D, columnas 3D con PyDeck y gráficos con Plotly.",
         guia: "./modulos/modulo-5-streamlit-python-apps/README.md",
-        demo: "./modulos/modulo-5-streamlit-python-apps/app_geoanalizador.py"
+        demo: "./modulos/modulo-5-streamlit-python-apps/app_geoanalizador.py",
+        slidesHtml: "./modulos/modulo-5-streamlit-python-apps/presentacion-modulo-5.html",
+        slidesPptx: "./modulos/modulo-5-streamlit-python-apps/presentacion-modulo-5.pptx"
       },
       {
         id: "m6",
@@ -324,7 +334,9 @@
         titulo: "Git, GitHub y Despliegue Gratuito en la Nube",
         desc: "Publica tus visores y dashboards gratis con GitHub Pages y Streamlit Community Cloud, solucionando errores de rutas o CORS con ayuda de la IA.",
         guia: "./modulos/modulo-6-github-despliegue/README.md",
-        demo: "./GUIA_SOLUCION_ERRORES.md"
+        demo: "./GUIA_SOLUCION_ERRORES.md",
+        slidesHtml: "./modulos/modulo-6-github-despliegue/presentacion-modulo-6.html",
+        slidesPptx: "./modulos/modulo-6-github-despliegue/presentacion-modulo-6.pptx"
       }
     ];
 
@@ -365,11 +377,17 @@
               <p class="text-xs text-slate-300 leading-relaxed">${m.desc}</p>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap gap-2">
+              <a href="${m.slidesHtml}" class="bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 text-xs px-3 py-1.5 rounded-lg font-semibold border border-amber-500/30">
+                📽️ Diapositivas Web
+              </a>
+              <a href="${m.slidesPptx}" download class="bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 text-xs px-3 py-1.5 rounded-lg font-semibold border border-emerald-500/30">
+                ⬇️ PPT (.pptx)
+              </a>
               <a href="${m.guia}" class="bg-slate-800 hover:bg-slate-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium border border-slate-700">
-                📖 Guía Paso a Paso (README)
+                📖 Guía README
               </a>
               <a href="${m.demo}" class="bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 text-xs px-3 py-1.5 rounded-lg font-semibold border border-sky-500/30">
-                🚀 Ver Entregable / Código
+                🚀 Laboratorio
               </a>
             </div>
           </div>
@@ -435,3 +453,4 @@ Entrégame el código completo y funcional, sin omitir secciones.`;
   </script>
 </body>
 </html>
+

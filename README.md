@@ -21,14 +21,14 @@ Aprenderás a comunicarte con modelos de Inteligencia Artificial mediante **Inge
 
 ## 🧭 Ruta de Aprendizaje Paso a Paso (14 Horas)
 
-| Módulo | Título y Acceso a la Lección | Proyecto Práctico Incluido | Tiempo Estimado |
-| :--- | :--- | :--- | :---: |
-| **Módulo 1** | [🧠 Fundamentos WebGIS e Ingeniería de Prompts (C-T-D-E)](./modulos/modulo-1-prompts-fundamentos/README.md) | [`visor-basico-selper.html`](./modulos/modulo-1-prompts-fundamentos/visor-basico-selper.html) — Primer visor de estaciones con selector satelital/oscuro | **2.0 h** |
-| **Módulo 2** | [🗺️ Visores Interactivos con HTML, JS y Leaflet](./modulos/modulo-2-visores-leaflet/README.md) | [`visor-catastral-ambiental.html`](./modulos/modulo-2-visores-leaflet/visor-catastral-ambiental.html) — Visor coroplético, clustering, WMS y filtros | **2.5 h** |
-| **Módulo 3** | [🐍 Automatización de Datos y Mapas con Python + IA](./modulos/modulo-3-python-geodatos/README.md) | [`procesamiento_y_mapas.py`](./modulos/modulo-3-python-geodatos/procesamiento_y_mapas.py) y [`comparador-satelital-split.html`](./modulos/modulo-3-python-geodatos/comparador-satelital-split.html) | **2.5 h** |
-| **Módulo 4** | [📊 Dashboards Geográficos (Leaflet + Chart.js + Turf.js)](./modulos/modulo-4-dashboards-geograficos/README.md) | [`dashboard-riesgo-territorio.html`](./modulos/modulo-4-dashboards-geograficos/dashboard-riesgo-territorio.html) — Dashboard reactivo + Buffer espacial | **3.0 h** |
-| **Módulo 5** | [🚀 Web Apps Geoespaciales con Python y Streamlit](./modulos/modulo-5-streamlit-python-apps/README.md) | [`app_geoanalizador.py`](./modulos/modulo-5-streamlit-python-apps/app_geoanalizador.py) — Analizador 2D/3D con carga de archivos CSV/GeoJSON | **2.0 h** |
-| **Módulo 6** | [☁️ Git, GitHub y Despliegue Gratuito en la Nube](./modulos/modulo-6-github-despliegue/README.md) | [`index.html`](./index.html) — Publicación en GitHub Pages y Streamlit Cloud | **2.0 h** |
+| Módulo | Guía Teórica y Paso a Paso | Presentaciones (PowerPoint y Web) | Proyecto Práctico Incluido | Tiempo |
+| :--- | :--- | :--- | :--- | :---: |
+| **Módulo 1** | [🧠 Fundamentos WebGIS e Ingeniería de Prompts (C-T-D-E)](./modulos/modulo-1-prompts-fundamentos/README.md) | [⬇️ `.pptx`](./modulos/modulo-1-prompts-fundamentos/presentacion-modulo-1.pptx) • [📽️ Slides Web](./modulos/modulo-1-prompts-fundamentos/presentacion-modulo-1.html) | [`visor-basico-selper.html`](./modulos/modulo-1-prompts-fundamentos/visor-basico-selper.html) | **2.0 h** |
+| **Módulo 2** | [🗺️ Visores Interactivos con HTML, JS y Leaflet](./modulos/modulo-2-visores-leaflet/README.md) | [⬇️ `.pptx`](./modulos/modulo-2-visores-leaflet/presentacion-modulo-2.pptx) • [📽️ Slides Web](./modulos/modulo-2-visores-leaflet/presentacion-modulo-2.html) | [`visor-catastral-ambiental.html`](./modulos/modulo-2-visores-leaflet/visor-catastral-ambiental.html) | **2.5 h** |
+| **Módulo 3** | [🐍 Automatización de Datos y Mapas con Python + IA](./modulos/modulo-3-python-geodatos/README.md) | [⬇️ `.pptx`](./modulos/modulo-3-python-geodatos/presentacion-modulo-3.pptx) • [📽️ Slides Web](./modulos/modulo-3-python-geodatos/presentacion-modulo-3.html) | [`procesamiento_y_mapas.py`](./modulos/modulo-3-python-geodatos/procesamiento_y_mapas.py) y [`comparador-satelital-split.html`](./modulos/modulo-3-python-geodatos/comparador-satelital-split.html) | **2.5 h** |
+| **Módulo 4** | [📊 Dashboards Geográficos (Leaflet + Chart.js + Turf.js)](./modulos/modulo-4-dashboards-geograficos/README.md) | [⬇️ `.pptx`](./modulos/modulo-4-dashboards-geograficos/presentacion-modulo-4.pptx) • [📽️ Slides Web](./modulos/modulo-4-dashboards-geograficos/presentacion-modulo-4.html) | [`dashboard-riesgo-territorio.html`](./modulos/modulo-4-dashboards-geograficos/dashboard-riesgo-territorio.html) | **3.0 h** |
+| **Módulo 5** | [🚀 Web Apps Geoespaciales con Python y Streamlit](./modulos/modulo-5-streamlit-python-apps/README.md) | [⬇️ `.pptx`](./modulos/modulo-5-streamlit-python-apps/presentacion-modulo-5.pptx) • [📽️ Slides Web](./modulos/modulo-5-streamlit-python-apps/presentacion-modulo-5.html) | [`app_geoanalizador.py`](./modulos/modulo-5-streamlit-python-apps/app_geoanalizador.py) | **2.0 h** |
+| **Módulo 6** | [☁️ Git, GitHub y Despliegue Gratuito en la Nube](./modulos/modulo-6-github-despliegue/README.md) | [⬇️ `.pptx`](./modulos/modulo-6-github-despliegue/presentacion-modulo-6.pptx) • [📽️ Slides Web](./modulos/modulo-6-github-despliegue/presentacion-modulo-6.html) | [`index.html`](./index.html) | **2.0 h** |
 
 ---
 
@@ -55,3 +55,4 @@ Aprenderás a comunicarte con modelos de Inteligencia Artificial mediante **Inge
    Abre el archivo `index.html` en tu navegador (o usa la extensión **Live Server** en Visual Studio Code) para ver el portal interactivo, probar los visores en vivo y copiar los prompts con un clic.
 3. **Avanza módulo por módulo:**
    Entra a la carpeta [`/modulos`](./modulos/), lee el archivo `README.md` de cada módulo, copia los prompts en **Claude** o **Gemini**, compáralos con las soluciones incluidas y realiza el reto corto al final de cada lección.
+

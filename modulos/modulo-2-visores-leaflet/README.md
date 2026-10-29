@@ -64,3 +64,4 @@ Si cargas más de 200 puntos individuales (como focos de calor FIRMS o predios u
 - [ ] Verifica que la leyenda cambie automáticamente cuando seleccionas esa cuarta opción.
 
 👉 **[Ir al Módulo 3: Automatización y Preparación de Datos Geoespaciales con Python + IA](../modulo-3-python-geodatos/README.md)**
+

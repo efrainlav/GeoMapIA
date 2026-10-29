@@ -47,3 +47,4 @@ Cuando programas visores con ayuda de IA (Claude, Gemini, ChatGPT), el **95% de 
 1. Con tu visor abierto en Google Chrome, Edge o Firefox, presiona la tecla **`F12`** (o clic derecho $\rightarrow$ **Inspeccionar**).
 2. Haz clic en la pestaña **Console (Consola)**.
 3. Si hay una línea en **color rojo**, cópiala completa y pégala en Claude o Gemini usando el **Prompt 6.1** de nuestro [`PROMPT_PLAYBOOK.md`](./PROMPT_PLAYBOOK.md).
+

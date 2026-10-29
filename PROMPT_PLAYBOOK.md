@@ -166,3 +166,4 @@ Acabo de crear un visor geográfico llamado "[NOMBRE DE TU PROYECTO]" para "[PRO
 Usa las tecnologías: HTML5, Leaflet.js, Chart.js y datos en formato GeoJSON.
 Redáctame un archivo `README.md` atractivo con emojis, insignias (badges), descripción del proyecto, capturas de pantalla (deja los enlaces de marcador de posición), lista de funcionalidades, tecnologías usadas, cómo ejecutarlo localmente y créditos para la comunidad SELPER Colombia.
 ```
+

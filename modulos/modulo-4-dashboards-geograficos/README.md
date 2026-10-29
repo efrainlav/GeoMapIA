@@ -55,3 +55,4 @@ Normalmente, para hacer un **Buffer (Área de Influencia)** o un **Conteo de Pun
 - [ ] Pídele a la IA que agregue un tercer gráfico o cambie el gráfico de dona por un gráfico polar (`polarArea`) en Chart.js.
 
 👉 **[Ir al Módulo 5: Aplicaciones Web Analíticas con Python y Streamlit](../modulo-5-streamlit-python-apps/README.md)**
+

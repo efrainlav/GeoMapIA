@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Módulo 5 — Aplicaciones Web Analíticas con Python, Streamlit y PyDeck 3D | SELPER Colombia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+  <style>
+    body { background-color: #020617; }
+    .reveal .slides { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: ui-sans-serif, system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+  <!-- Barra Superior Fija con Descarga de PowerPoint (.pptx) -->
+  <header class="fixed top-0 left-0 right-0 h-12 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 flex items-center justify-between z-50 text-xs">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <span class="font-bold text-white truncate max-w-md">
+        📽️ Presentación Teórica — Módulo 5: Aplicaciones Web Analíticas con Python, Streamlit y PyDeck 3D
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="./presentacion-modulo-5.pptx" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-lg shadow transition flex items-center gap-1">
+        ⬇️ Descargar PowerPoint (.pptx)
+      </a>
+      <a href="./app_geoanalizador.py" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-3 py-1 rounded-lg transition hidden sm:inline-block">
+        🚀 Ir al Laboratorio Práctico →
+      </a>
+    </div>
+  </header>
+
+  <div class="reveal pt-6">
+    <div class="slides">
+      
+      <section>
+        <div class="max-w-5xl mx-auto bg-slate-900/95 border-2 rounded-3xl p-10 text-left shadow-2xl" style="border-color: #EC4899">
+          <div class="inline-block text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style="background: #EC489922; color: #EC4899; border: 1px solid #EC489966;">
+            🛰️ CURSO AUTODIDACTA GEOMAPIA • MÓDULO 5 • 2.0 HORAS
+          </div>
+          <h1 class="!text-3xl md:!text-5xl font-extrabold text-white leading-tight mb-4">
+            Aplicaciones Web Analíticas con Python, Streamlit y PyDeck 3D
+          </h1>
+          <p class="!text-base md:!text-xl text-slate-300 mb-6">
+            Construcción de herramientas donde el usuario sube sus propios datos espaciales y los analiza en 2D y 3D
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800 text-xs text-slate-400">
+            <span>Sociedad Latinoamericana en Percepción Remota y Sistemas de Información Espacial (<a href="https://selper.org.co/" target="_blank" class="text-sky-400 underline">SELPER Colombia</a>)</span>
+            <span class="text-slate-300 font-semibold">Usa las flechas ⬅️ ➡️ del teclado para avanzar (8 diapositivas)</span>
+          </div>
+        </div>
+      </section>
+    
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 2 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            1. ¿Cuándo elegir HTML/JS vs Python con Streamlit?
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Visor HTML + JS + Leaflet (Módulos 1, 2 y 4)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Corre 100% en el navegador del visitante (velocidad instantánea).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se aloja gratis de forma ilimitada en GitHub Pages.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Ideal para visores públicos, portafolios y tableros con datos pre-cargados.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>No requiere servidor de Python encendido.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Web App Python + Streamlit (Módulo 5)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Permite ejecutar todo el poder científico de Python (Pandas, GeoPandas, Scikit-Learn) en vivo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Convertir un script de Python en una página web toma solo 15 líneas de código.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Ideal para herramientas donde el usuario sube un Excel/CSV/GeoJSON para procesarlo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Se despliega gratis en Streamlit Community Cloud conectado a tu GitHub.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Un especialista completo de SELPER domina ambos mundos y elige la herramienta según la necesidad del proyecto.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 3 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            2. ¿Cómo funciona el Modelo Reactivo de Streamlit?
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                De Script a Interfaz Web sin HTML ni CSS
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>En Streamlit no escribes etiquetas &lt;div&gt; ni funciones complicadas de eventos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Cada vez que el usuario mueve un control, Streamlit re-ejecuta el script de arriba a abajo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Una variable recibe directamente el valor del control: region = st.sidebar.selectbox(...).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>La IA genera scripts de Streamlit extremadamente compactos y fáciles de leer.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Componentes Esenciales para Geomática
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>st.set_page_config(layout=&#x27;wide&#x27;): Activa el modo de pantalla ancha.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>st.sidebar: Crea el panel lateral retráctil para filtros y carga de archivos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>st.columns(4) + st.metric(): Crea la fila superior de tarjetas KPI.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>st.tabs([&#x27;Mapa 3D&#x27;, &#x27;Mapa 2D&#x27;, &#x27;Gráficos&#x27;]): Organiza la app en pestañas limpias.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Para probar tu app localmente solo ejecutas en terminal: streamlit run app_geoanalizador.py</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 4 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            3. Carga Dinámica de Archivos del Usuario (st.file_uploader)
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Democratizando el Análisis Espacial
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Un técnico de campo toma datos con GPS y los guarda en un archivo CSV o Excel.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Con st.sidebar.file_uploader(&#x27;Sube tu CSV&#x27;, type=[&#x27;csv&#x27;]), puede arrastrarlo a tu app.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Si el usuario aún no ha subido nada, la app carga por defecto nuestro dataset de muestra.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Así la aplicación nunca se ve vacía al abrirla por primera vez.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Validación Automática que pedimos en el Prompt
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Verificar que existan las columnas de coordenadas (latitud / longitud).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Eliminar filas vacías con df.dropna(subset=[&#x27;latitud&#x27;, &#x27;longitud&#x27;]).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Detectar automáticamente las columnas numéricas para ofrecerlas en un selector.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Permitir descargar la tabla procesada y filtrada con st.download_button().</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>En el Prompt 5.1 pedimos siempre este patrón: &#x27;Dataset de respaldo por defecto + file_uploader opcional&#x27;.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 5 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            4. Visualización Geoespacial 3D con PyDeck (Deck.gl)
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Qué es PyDeck?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Es la interfaz en Python de Deck.gl (creada por Uber para visualización espacial WebGL).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Viene integrada nativamente en Streamlit mediante st.pydeck_chart().</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Permite inclinar la cámara (pitch=45) y rotar el mapa en 3 dimensiones.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Renderiza cientos de miles de elementos en 3D usando la tarjeta gráfica (GPU).</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Capas 3D de Alto Impacto en Agricultura y Ambiente
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>ColumnLayer: Levanta cilindros 3D sobre cada lote o estación según una variable.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Ejemplo: La altura representa el Rendimiento (ton/ha), la Altitud (msnm) o el NDVI.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>HexagonLayer: Agrupa puntos en celdas hexagonales 3D para medir densidad espacial.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Incluye tooltips interactivos al pasar el cursor sobre cada columna 3D.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Mantén presionada la tecla Ctrl (o Cmd en Mac) + clic izquierdo y arrastra para girar el mapa 3D en PyDeck.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 6 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            5. Mapas 2D y Gráficos Analíticos con Plotly Express
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Mapas Interactivos con px.scatter_mapbox
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Plotly Express permite crear mapas 2D sin necesidad de token usando mapbox_style=&#x27;carto-darkmatter&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Codifica simultáneamente 2 variables: Color por tipo de cultivo y Tamaño por índice NDVI.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Incluye herramientas de selección por lazo (Lasso Select) y caja directamente en el mapa.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se inserta en Streamlit con st.plotly_chart(fig, use_container_width=True).</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Gráficos Estadísticos Conectados al Filtro
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Gráfico de barras agrupadas: Comparativa de NDVI por Cultivo y Estado Fitosanitario.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Gráfico de dispersión (Scatter): Relación entre Humedad del Suelo (%) y Vigor NDVI.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Tabla interactiva ordenable con st.dataframe(df_filtrado).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Todo responde en milisegundos al cambiar la Región o los Cultivos en la barra lateral.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Plotly incluye un botón de cámara en cada gráfico para descargar la figura en PNG de alta resolución para informes.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 7 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            6. Optimización y Archivo requirements.txt
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Acelerando tu App con @st.cache_data
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Si tu app carga un GeoJSON o CSV grande, no querrás leerlo del disco en cada clic.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Al decorar la función de lectura con @st.cache_data, Streamlit guarda el dato en memoria RAM.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Los filtros posteriores se ejecutan de forma instantánea.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Pídele siempre a la IA: &#x27;Usa @st.cache_data para las funciones de carga de datos&#x27;.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                El Archivo requirements.txt para la Nube
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Para que Streamlit Cloud sepa qué instalar en su servidor Linux, necesita requirements.txt.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Incluye únicamente las librerías externas importadas (streamlit, pandas, pydeck, plotly).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Evita poner librerías del sistema estándar de Python (como os, json, pathlib o math).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>En este módulo ya dejamos creado requirements.txt listo para desplegar.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Un requirements.txt limpio y minimalista garantiza que el despliegue en la nube tarde menos de 90 segundos.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #EC4899">
+              MÓDULO 5 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 8 / 8</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            7. Resumen y Práctica del Módulo 5
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Competencias Adquiridas
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Criterio arquitectónico para elegir entre Leaflet (JS) y Streamlit (Python).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Construcción de aplicaciones con carga de archivos de usuario (file_uploader).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Visualización 3D de variables territoriales y agrícolas con PyDeck.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Integración de mapas y gráficos estadísticos interactivos con Plotly.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #EC489988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Tu Reto Práctico Autodidacta
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Revisa el código de app_geoanalizador.py en la carpeta del Módulo 5.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Ejecútalo con streamlit run app_geoanalizador.py o pruébalo en Streamlit Cloud.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Pídele a la IA agregar un filtro deslizante (st.slider) por Altitud (msnm).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>4. Marca el Módulo 5 como completado en el portal.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #EC489966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>¡Vamos al último módulo: Módulo 6, donde publicaremos todo nuestro portafolio en internet gratis!</span>
+          </div>
+        </div>
+      </section>
+        
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1280,
+      height: 720,
+      margin: 0.06
+    });
+  </script>
+</body>
+</html>

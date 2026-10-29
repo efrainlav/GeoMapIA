@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Módulo 6 — Git, GitHub y Despliegue Gratuito en la Nube (GitHub Pages y Streamlit Cloud) | SELPER Colombia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+  <style>
+    body { background-color: #020617; }
+    .reveal .slides { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: ui-sans-serif, system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+  <!-- Barra Superior Fija con Descarga de PowerPoint (.pptx) -->
+  <header class="fixed top-0 left-0 right-0 h-12 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 flex items-center justify-between z-50 text-xs">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <span class="font-bold text-white truncate max-w-md">
+        📽️ Presentación Teórica — Módulo 6: Git, GitHub y Despliegue Gratuito en la Nube (GitHub Pages y Streamlit Cloud)
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="./presentacion-modulo-6.pptx" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-lg shadow transition flex items-center gap-1">
+        ⬇️ Descargar PowerPoint (.pptx)
+      </a>
+      <a href="../../index.html" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-3 py-1 rounded-lg transition hidden sm:inline-block">
+        🚀 Ir al Laboratorio Práctico →
+      </a>
+    </div>
+  </header>
+
+  <div class="reveal pt-6">
+    <div class="slides">
+      
+      <section>
+        <div class="max-w-5xl mx-auto bg-slate-900/95 border-2 rounded-3xl p-10 text-left shadow-2xl" style="border-color: #38BDF8">
+          <div class="inline-block text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style="background: #38BDF822; color: #38BDF8; border: 1px solid #38BDF866;">
+            🛰️ CURSO AUTODIDACTA GEOMAPIA • MÓDULO 6 • 2.0 HORAS
+          </div>
+          <h1 class="!text-3xl md:!text-5xl font-extrabold text-white leading-tight mb-4">
+            Git, GitHub y Despliegue Gratuito en la Nube (GitHub Pages y Streamlit Cloud)
+          </h1>
+          <p class="!text-base md:!text-xl text-slate-300 mb-6">
+            Publicación profesional de visores, resolución de errores CORS/rutas y creación de tu portafolio SELPER
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800 text-xs text-slate-400">
+            <span>Sociedad Latinoamericana en Percepción Remota y Sistemas de Información Espacial (<a href="https://selper.org.co/" target="_blank" class="text-sky-400 underline">SELPER Colombia</a>)</span>
+            <span class="text-slate-300 font-semibold">Usa las flechas ⬅️ ➡️ del teclado para avanzar (7 diapositivas)</span>
+          </div>
+        </div>
+      </section>
+    
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #38BDF8">
+              MÓDULO 6 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 2 / 7</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            1. ¿Por qué Git y GitHub son Indispensables en Geomática?
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Más allá de guardar carpetas con nombres &#x27;Final_v2_ahora_si&#x27;
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Git es un sistema de control de versiones: registra cada cambio en tu código y datos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Si un nuevo prompt rompe tu visor, puedes regresar al estado exacto de hace 10 minutos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>GitHub es la plataforma en la nube donde alojas tus repositorios y colaboras.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Además, GitHub te regala alojamiento web gratuito (GitHub Pages) para tus visores.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #38BDF888">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Los 4 Conceptos que debes conocer
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Repositorio (Repo): La carpeta principal de tu proyecto (ej. GeoMapIA).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Commit: Una &#x27;fotografía&#x27; guardada de tus avances con un mensaje descriptivo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Rama principal (main): La línea oficial de tu proyecto lista para el público.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>4. Push: Subir tus commits locales desde tu computador hacia GitHub.com.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #38BDF866">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Puedes usar GitHub Desktop o el panel lateral de VS Code para hacer Commit y Push con un solo clic.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #38BDF8">
+              MÓDULO 6 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 3 / 7</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            2. Estructura Óptima de un Repositorio WebGIS
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Organización Profesional de Carpetas
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>index.html en la raíz: Es la puerta de entrada que busca automáticamente GitHub Pages.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>README.md: La portada técnica y comercial que explica qué hace tu proyecto.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>/data: Carpeta dedicada a tus capas .geojson y .csv optimizados.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>/modulos o /visores: Subcarpetas ordenadas para cada visor o dashboard.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #38BDF888">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Buenas Prácticas de Nombres de Archivo
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Usa siempre minúsculas y guiones medios: visor-catastral.html (nunca espacios ni tildes).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>⚠️ En Windows/Mac &#x27;Datos.geojson&#x27; y &#x27;datos.geojson&#x27; parecen iguales, pero en Linux (GitHub) son distintos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Incluye un archivo .gitignore para no subir archivos temporales (.DS_Store, __pycache__).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Mantén cada archivo GeoJSON por debajo de 10-15 MB para carga rápida.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #38BDF866">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Una estructura limpia facilita que tanto tus colegas de SELPER como la IA entiendan tu proyecto.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #38BDF8">
+              MÓDULO 6 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 4 / 7</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            3. Despliegue de Visores HTML/JS en GitHub Pages
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Paso a Paso (Toma menos de 2 minutos)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>1. Entra a tu repositorio en GitHub.com (ej. github.com/tu-usuario/GeoMapIA).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>2. Haz clic en la pestaña superior &#x27;Settings&#x27; (Configuración).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>3. En el menú izquierdo, selecciona la sección &#x27;Pages&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>4. En &#x27;Branch&#x27;, elige &#x27;main&#x27; y carpeta &#x27;/ (root)&#x27;, y presiona &#x27;Save&#x27;.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #38BDF888">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Qué ocurre automáticamente?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>GitHub compila y publica tu sitio bajo certificado de seguridad HTTPS gratuito.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Obtienes tu URL pública: https://tu-usuario.github.io/GeoMapIA/</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Cada vez que hagas un nuevo &#x27;git push&#x27; desde tu PC, la web se actualizará sola en 1 minuto.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Puedes compartir ese enlace por WhatsApp, correo, informes o LinkedIn.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #38BDF866">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Alternativas gratuitas adicionales con conexión directa a GitHub: Vercel y Netlify.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #38BDF8">
+              MÓDULO 6 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 5 / 7</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            4. Solución a los 3 Errores Clásicos en Producción
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Error 1 y 2: Rutas Rotas y Bloqueo CORS
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Error de ruta absoluta: usar fetch(&#x27;/data/capa.geojson&#x27;) falla en subcarpetas de GitHub Pages.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Solución: Usar siempre ruta relativa con punto inicial: fetch(&#x27;./data/capa.geojson&#x27;).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Error CORS local: abrir con doble clic (file://) bloquea fetch().</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Al subirlo a GitHub Pages (https://), ¡el error CORS desaparece porque ya es un servidor real!</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #38BDF888">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Error 3: Contenido Mixto (Mixed Content HTTP vs HTTPS)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>GitHub Pages corre sobre HTTPS seguro.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Si conectas un servicio WMS o librería con &#x27;http://&#x27; (sin la s), el navegador lo bloqueará.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Asegúrate de que todos los enlaces CDN y servicios WMS usen &#x27;https://&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Consulta nuestra GUIA_SOLUCION_ERRORES.md para los prompts reparadores.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #38BDF866">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Si algo no carga en GitHub Pages, abre F12 -&gt; pestaña Network (Red) y busca líneas en color rojo (Error 404).</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #38BDF8">
+              MÓDULO 6 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 6 / 7</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            5. Despliegue de Apps Python en Streamlit Community Cloud
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Por qué GitHub Pages no ejecuta Python
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>GitHub Pages es un servidor de archivos estáticos (ejecuta HTML, CSS y JS en el navegador).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Una aplicación de Streamlit (.py) requiere un servidor con un intérprete de Python vivo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Para eso existe Streamlit Community Cloud (share.streamlit.io), 100% gratuito.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se conecta directamente a tu mismo repositorio de GitHub.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #38BDF888">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Los 3 Pasos en share.streamlit.io
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Inicia sesión con tu cuenta de GitHub y haz clic en &#x27;Create app&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Elige tu repositorio (GeoMapIA) y la rama &#x27;main&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Indica la ruta del archivo: modulos/modulo-5-streamlit-python-apps/app_geoanalizador.py.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Streamlit leerá automáticamente el requirements.txt y publicará tu URL pública.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #38BDF866">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Cualquier cambio que subas a GitHub actualizará en vivo tu aplicación de Streamlit sin reiniciar nada.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #38BDF8">
+              MÓDULO 6 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 7 / 7</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            6. Tu Portafolio Geoespacial y Cierre del Curso SELPER
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Documentación de Alto Impacto con IA
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Un buen proyecto sin un buen README.md pasa desapercibido.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Usa el Prompt 6.2 de nuestro Playbook para generar insignias, descripción técnica y créditos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Personaliza el archivo index.html de este curso para convertirlo en tu Hub Cartográfico personal.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Enlaza tus 4 casos aplicados: Ambiental/Satelital, Catastro, Gestión del Riesgo y Agro 3D.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #38BDF888">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Tu Nueva Capacidad como Profesional AI-First
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Pasaste de consumidor de software SIG cerrado a creador de plataformas web abiertas.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Dominas la fórmula C-T-D-E para comunicarte con cualquier modelo presente o futuro.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Sabes integrar Leaflet, Turf.js, Chart.js, GeoPandas, Streamlit y GitHub.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>¡Comparte tus visores con la comunidad de SELPER Colombia (selper.org.co)!</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #38BDF866">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>¡Felicitaciones por completar las 14 horas del Curso Autodidacta GeoMapIA — SELPER Colombia!</span>
+          </div>
+        </div>
+      </section>
+        
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1280,
+      height: 720,
+      margin: 0.06
+    });
+  </script>
+</body>
+</html>

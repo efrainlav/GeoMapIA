@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Módulo 1 — Mentalidad AI-First, Entorno WebGIS e Ingeniería de Prompts (C-T-D-E) | SELPER Colombia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+  <style>
+    body { background-color: #020617; }
+    .reveal .slides { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: ui-sans-serif, system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+  <!-- Barra Superior Fija con Descarga de PowerPoint (.pptx) -->
+  <header class="fixed top-0 left-0 right-0 h-12 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 flex items-center justify-between z-50 text-xs">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <span class="font-bold text-white truncate max-w-md">
+        📽️ Presentación Teórica — Módulo 1: Mentalidad AI-First, Entorno WebGIS e Ingeniería de Prompts (C-T-D-E)
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="./presentacion-modulo-1.pptx" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-lg shadow transition flex items-center gap-1">
+        ⬇️ Descargar PowerPoint (.pptx)
+      </a>
+      <a href="./visor-basico-selper.html" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-3 py-1 rounded-lg transition hidden sm:inline-block">
+        🚀 Ir al Laboratorio Práctico →
+      </a>
+    </div>
+  </header>
+
+  <div class="reveal pt-6">
+    <div class="slides">
+      
+      <section>
+        <div class="max-w-5xl mx-auto bg-slate-900/95 border-2 rounded-3xl p-10 text-left shadow-2xl" style="border-color: #0EA5E9">
+          <div class="inline-block text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style="background: #0EA5E922; color: #0EA5E9; border: 1px solid #0EA5E966;">
+            🛰️ CURSO AUTODIDACTA GEOMAPIA • MÓDULO 1 • 2.0 HORAS
+          </div>
+          <h1 class="!text-3xl md:!text-5xl font-extrabold text-white leading-tight mb-4">
+            Mentalidad AI-First, Entorno WebGIS e Ingeniería de Prompts (C-T-D-E)
+          </h1>
+          <p class="!text-base md:!text-xl text-slate-300 mb-6">
+            Fundamentos teóricos y prácticos para crear mapas web conversando con IA • SELPER Colombia
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800 text-xs text-slate-400">
+            <span>Sociedad Latinoamericana en Percepción Remota y Sistemas de Información Espacial (<a href="https://selper.org.co/" target="_blank" class="text-sky-400 underline">SELPER Colombia</a>)</span>
+            <span class="text-slate-300 font-semibold">Usa las flechas ⬅️ ➡️ del teclado para avanzar (10 diapositivas)</span>
+          </div>
+        </div>
+      </section>
+    
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 2 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            1. El Cambio de Paradigma en la Geomática
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Enfoque Tradicional WebGIS
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Meses aprendiendo sintaxis de HTML, CSS, JS y librerías antes de ver un mapa.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Alta fricción por errores de punto y coma, rutas o versiones de paquetes.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Dependencia total de un programador externo para publicar un visor sencillo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Mucho tiempo invertido en código repetitivo (boilerplate).</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Enfoque AI-First para Especialistas SIG
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Tú aportas el criterio espacial, cartográfico y temático (el QUÉ y el PORQUÉ).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>La IA (Claude, Gemini, ChatGPT) escribe la sintaxis técnica (el CÓMO).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Creación de prototipos funcionales en minutos mediante Prompts estructurados.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Aprendizaje inverso: entiendes el código viendo funcionar tu propio mapa.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>El profesional de SELPER no es reemplazado por la IA; se convierte en Arquitecto Geoespacial capaz de desplegar sus propios visores.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 3 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            2. ¿Qué Asistente de IA elegir para cada tarea SIG?
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Claude (Anthropic) y ChatGPT (OpenAI)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Claude (Sonnet + Artifacts): Renderiza visores HTML/Leaflet en vivo dentro del chat.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Excelente precisión generando dashboards extensos en un solo archivo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>ChatGPT: Muy versátil para explicar errores paso a paso y generar scripts Python.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Ideal para iterar funciones específicas de filtrado o simbología.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Gemini (Google) y Editores con IA
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Gemini: Ventana de contexto masiva ideal para pegar archivos GeoJSON/CSV largos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Multimodalidad nativa: sube una captura de un dashboard y pídele la maqueta HTML.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>VS Code + extensiones de IA: Edita archivos directamente en tu carpeta local.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Regla práctica: ¡El mismo Prompt C-T-D-E funciona en cualquiera de ellos!</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>No dependas de una sola herramienta: aprende la estructura universal del prompt geoespacial.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 4 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            3. Anatomía Técnica de un Visor Geográfico Web
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Las 3 Capas del Navegador (Frontend)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>1. HTML5 (Estructura): Crea el contenedor &lt;div id=&#x27;map&#x27;&gt;&lt;/div&gt; y los paneles.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>2. CSS3 / Tailwind (Diseño): Define que el mapa mida 100vh y estiliza leyendas.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>3. JavaScript + Leaflet.js (Lógica): Carga teselas satelitales, dibuja capas y popups.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Todo puede convivir en un único archivo .html para facilitar el aprendizaje.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                El Flujo de Carga en el Navegador
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 1: El navegador lee las librerías por CDN (sin instalar nada en disco).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 2: Leaflet inicializa el lienzo centrado en coordenadas [Lat, Lon] y Zoom.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 3: Se conectan los Mapas Base (OSM, CartoDB Dark, Esri World Imagery).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 4: Se superponen tus datos vectoriales (GeoJSON) o servicios OGC (WMS).</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Si el contenedor &lt;div id=&#x27;map&#x27;&gt; no tiene altura en CSS (height), el mapa saldrá en blanco.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 5 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            4. Estándares de Datos Espaciales en la Web
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Formatos Vectoriales y Tabulares
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>GeoJSON (.geojson): El estándar rey de los visores web (basado en JSON).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>CSV con Lat/Lon: Ideal para tablas de Excel de muestreo o estaciones.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Shapefile (.shp): Formato de escritorio (QGIS/ArcGIS); debe convertirse a GeoJSON.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>KML / GPX: Formatos comunes en GPS y Google Earth fácilmente convertibles.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Servicios Ráster y Satelitales OGC
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Tiles XYZ: Cuadrículas pre-renderizadas por nivel de zoom ({z}/{x}/{y}.png).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>WMS / WMTS: Estándar OGC usado por IGAC, IDEAM, SIAC y NASA GIBS.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>COG (Cloud Optimized GeoTIFF): Imágenes satelitales optimizadas para lectura parcial.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Siempre indica a la IA cuál de estos formatos vas a consumir.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Un Shapefile consta de varios archivos (.shp, .dbf, .shx, .prj); la web prefiere un único archivo .geojson.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 6 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            5. Sistemas de Referencia: MAGNA-SIRGAS vs WGS84 Web
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Cartografía Oficial en Colombia
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>MAGNA-SIRGAS Origen Nacional (EPSG:9377) o antiguos orígenes (EPSG:3116).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Coordenadas planas en metros (ej. Este: 4.885.000 m, Norte: 2.065.000 m).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Excelentes para medir áreas en hectáreas y distancias métricas en SIG.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>⚠️ Si las cargas directo en Leaflet, ¡tus puntos saldrán fuera del planeta!</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Estándar de Mapas Web (Leaflet / Web Mercator)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Las librerías web esperan coordenadas geográficas WGS84 (EPSG:4326).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Valores en grados decimales (Colombia aprox: Latitud -4° a 13°, Longitud -79° a -66°).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Atención al orden: Leaflet usa [Latitud, Longitud], mientras GeoJSON usa [Lon, Lat].</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>La IA puede detectar y transformar tus coordenadas automáticamente.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>En tu prompt especifica siempre: &#x27;Mis coordenadas están en EPSG:4326 (Latitud, Longitud para Colombia)&#x27;.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 7 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            6. Metodología C-T-D-E de Ingeniería de Prompts SIG
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                C (Contexto) + T (Tecnología)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>[C] Contexto y Rol: &#x27;Actúa como un desarrollador WebGIS Senior de SELPER Colombia...&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Define el propósito temático: monitoreo ambiental, catastro o gestión del riesgo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>[T] Tecnología: &#x27;Crea un único archivo HTML autocontenido con Leaflet 1.9.4 y Tailwind CSS por CDN.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Evita que la IA divida el proyecto en 10 archivos complejos cuando estás empezando.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                D (Datos) + E (Estilo y Comportamiento)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>[D] Datos: Lista los nombres exactos de las columnas/propiedades y el EPSG:4326.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Ejemplo: &#x27;propiedades: id, nombre, region, ndvi, precipitacion_mm, alerta&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>[E] Estilo: Especifica mapas base, colores por categoría, popups, leyenda y filtros.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Pide siempre: &#x27;Entrégame el código completo y funcional listo para abrir&#x27;.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>El Framework C-T-D-E reduce en un 90% las alucinaciones y errores de código en Claude y Gemini.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 8 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            7. Comparativa: Prompt Ambiguo vs Prompt C-T-D-E
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ❌ Prompt Ambiguo (Resultado Pobre)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>&#x27;Hazme una página web con un mapa de Colombia que tenga estaciones ambientales.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Problema 1: La IA no sabe qué librería usar (puede usar Google Maps con API Key de pago).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Problema 2: No incluye estilos de altura y el mapa sale en blanco.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Problema 3: No agrega leyenda, ni control de capas, ni datos realistas.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                ✅ Prompt C-T-D-E (Resultado Profesional)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>&#x27;[C] Rol WebGIS SELPER. [T] 1 archivo HTML con Leaflet 1.9.4 y Tailwind CDN.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>&#x27;[D] Centro en [4.6097, -74.0817], zoom 6. 12 estaciones con ndvi, precipitacion y alerta.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>&#x27;[E] Capas CartoDB Dark + Esri Satélite, círculos por color de alerta, filtro y leyenda.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Resultado: Un visor completo de nivel institucional en menos de 30 segundos.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>La calidad de tu visor web es directamente proporcional a la precisión de tu bloque [D] Datos y [E] Estilo.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 9 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            8. Depuración Asistida (AI Debugging) con F12
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Cómo leer errores en el navegador?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>1. Abre tu archivo HTML en Chrome, Edge o Firefox.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>2. Presiona la tecla F12 (o Clic Derecho -&gt; Inspeccionar).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>3. Abre la pestaña &#x27;Console&#x27; (Consola).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>4. Cualquier error de sintaxis o carga aparecerá en texto rojo con el número de línea.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                El Prompt Reparador en 1 Paso
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>No intentes adivinar el error en soledad: cópialo y pégalo en el chat de la IA.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Prompt: &#x27;Mi visor presenta este error en la consola F12: [PEGAR ERROR]. Corrige mi código.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Errores típicos que la IA resuelve al instante: comillas sin cerrar, CDN caído o CORS.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Para abrir archivos externos (.geojson), usa la extensión &#x27;Live Server&#x27; en VS Code.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Aprender a usar F12 + IA te garantiza que nunca te quedarás bloqueado estudiando de forma autodidacta.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #0EA5E9">
+              MÓDULO 1 • 2.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 10 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            9. Resumen y Práctica del Módulo 1
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Lo que hemos dominado hoy
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Configuración del entorno ligero (Navegador + VS Code + Live Server + IA).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Comprensión de HTML + CSS + JS (Leaflet) + EPSG:4326.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Aplicación práctica del Framework C-T-D-E para crear tu primer visor.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Flujo de inspección y corrección de errores con la consola F12.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #0EA5E988">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Tu Reto Práctico Autodidacta
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Abre el laboratorio: visor-basico-selper.html.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Haz clic en &#x27;🤖 Ver Prompt Usado&#x27; y cópialo en Claude o Gemini.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Pídele a la IA que agregue una estación en tu municipio y un filtro por región.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>4. Guarda tu versión y marca el Módulo 1 como completado en el portal.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #0EA5E966">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>¡Estás listo para el Módulo 2: Mapas Coropléticos, Servicios WMS y Clustering con Leaflet!</span>
+          </div>
+        </div>
+      </section>
+        
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1280,
+      height: 720,
+      margin: 0.06
+    });
+  </script>
+</body>
+</html>

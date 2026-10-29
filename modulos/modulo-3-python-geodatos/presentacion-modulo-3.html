@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Módulo 3 — Automatización de Datos Geoespaciales y Mapas con Python + IA | SELPER Colombia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+  <style>
+    body { background-color: #020617; }
+    .reveal .slides { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: ui-sans-serif, system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+  <!-- Barra Superior Fija con Descarga de PowerPoint (.pptx) -->
+  <header class="fixed top-0 left-0 right-0 h-12 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 flex items-center justify-between z-50 text-xs">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <span class="font-bold text-white truncate max-w-md">
+        📽️ Presentación Teórica — Módulo 3: Automatización de Datos Geoespaciales y Mapas con Python + IA
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="./presentacion-modulo-3.pptx" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-lg shadow transition flex items-center gap-1">
+        ⬇️ Descargar PowerPoint (.pptx)
+      </a>
+      <a href="./comparador-satelital-split.html" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-3 py-1 rounded-lg transition hidden sm:inline-block">
+        🚀 Ir al Laboratorio Práctico →
+      </a>
+    </div>
+  </header>
+
+  <div class="reveal pt-6">
+    <div class="slides">
+      
+      <section>
+        <div class="max-w-5xl mx-auto bg-slate-900/95 border-2 rounded-3xl p-10 text-left shadow-2xl" style="border-color: #F59E0B">
+          <div class="inline-block text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style="background: #F59E0B22; color: #F59E0B; border: 1px solid #F59E0B66;">
+            🛰️ CURSO AUTODIDACTA GEOMAPIA • MÓDULO 3 • 2.5 HORAS
+          </div>
+          <h1 class="!text-3xl md:!text-5xl font-extrabold text-white leading-tight mb-4">
+            Automatización de Datos Geoespaciales y Mapas con Python + IA
+          </h1>
+          <p class="!text-base md:!text-xl text-slate-300 mb-6">
+            GeoPandas, reproyección MAGNA-SIRGAS a WGS84, Folium y Comparadores Satelitales Split-Map
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800 text-xs text-slate-400">
+            <span>Sociedad Latinoamericana en Percepción Remota y Sistemas de Información Espacial (<a href="https://selper.org.co/" target="_blank" class="text-sky-400 underline">SELPER Colombia</a>)</span>
+            <span class="text-slate-300 font-semibold">Usa las flechas ⬅️ ➡️ del teclado para avanzar (10 diapositivas)</span>
+          </div>
+        </div>
+      </section>
+    
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 2 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            1. ¿Por qué usar Python en el Desarrollo de Visores Web?
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Los Cuellos de Botella antes del Visor
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Archivos Shapefile (.shp) de 150 MB que congelan cualquier navegador web.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Tablas de Excel con coordenadas sucias, comas en vez de puntos o celdas vacías.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Capas en proyección plana MAGNA-SIRGAS (EPSG:9377) incompatibles con Leaflet.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Necesidad de cruzar miles de puntos contra polígonos municipales cada semana.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Python + IA como Tubería (Pipeline) Automática
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>No necesitas memorizar funciones de Python: le describes la entrada y salida a la IA.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Un script de 20 líneas limpia, reproyecta, simplifica y exporta a .geojson en 2 segundos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Puedes ejecutarlo gratis en la nube con Google Colab (sin instalar nada) o en local.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Además, librerías como Folium y Leafmap exportan visores HTML directos desde Python.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Python prepara y optimiza el dato pesado; JavaScript/Leaflet lo visualiza a máxima velocidad.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 3 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            2. El Ecosistema Python Geoespacial Esencial
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Manipulación de Datos (Pandas y GeoPandas)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>pandas: Lee archivos Excel (.xlsx) y CSV, filtra filas, calcula promedios y limpia nulos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>geopandas: Extiende pandas agregando una columna &#x27;geometry&#x27; (puntos, líneas, polígonos).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Lee y escribe cualquier formato con una línea: gpd.read_file() y gdf.to_file().</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>shapely y pyproj: Motores internos para geometría y transformación de coordenadas.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Visualización Web desde Python
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>folium: Envuelve Leaflet.js en Python; permite exportar mapas interactivos a .html.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>leafmap: Creado por Qiusheng Wu; ideal para Percepción Remota, COG y Split-Maps.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>geopy: Geocodificación gratuita (convierte direcciones de texto en Lat/Lon).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>En tu prompt indica qué librerías prefieres para que el script sea limpio.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>En Google Colab puedes instalar GeoPandas y Folium con una sola celda: !pip install geopandas folium leafmap</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 4 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            3. Reproyección en Colombia: EPSG:9377 a EPSG:4326
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Diagnóstico del Sistema de Referencia (CRS)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>En GeoPandas, gdf.crs muestra el sistema actual de tu capa.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Capas nacionales del IGAC/DANE suelen venir en EPSG:9377 (Origen Nacional) o EPSG:3116.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Sus coordenadas se ven así: X = 4885210.45, Y = 2065120.12 (metros).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Para la web necesitamos grados decimales WGS84 (EPSG:4326): Lon = -74.08, Lat = 4.60.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                La Transformación Exacta en 1 Línea
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Comando clave: gdf_web = gdf.to_crs(epsg=4326).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Si un archivo no tiene .prj definido, primero se asigna con gdf.set_crs(epsg=9377).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>En el Prompt 3.1 le pedimos a la IA que verifique automáticamente el CRS antes de exportar.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Evita reproyectar manualmente capa por capa en software de escritorio.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Regla de oro antes de publicar en GitHub: verifica siempre que tu GeoJSON final esté en EPSG:4326.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 5 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            4. Optimización y Adelgazamiento de Capas para la Web
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Por qué pesa tanto un GeoJSON crudo?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>1. Exceso de vértices: Un río o municipio digitalizado a escala 1:1.000 tiene millones de nodos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>2. Exceso de decimales: Coordenadas como -74.08174928374928 (14 decimales son sub-milimétricos).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>3.Exceso de columnas: Tablas con 80 campos innecesarios que viajan por internet.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Un visor web óptimo debe cargar capas de menos de 3 a 5 MB.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Las 3 Técnicas de Reducción en Python
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Simplificación topológica: gdf[&#x27;geometry&#x27;] = gdf.simplify(0.0005, preserve_topology=True).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Filtrado de columnas: conservar solo las 5 o 6 variables que se muestran en el visor.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Redondeo de coordenadas a 5 decimales (~1 metro de precisión real en terreno).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Resultado: Un archivo de 60 MB baja a 1.5 MB y carga instantáneamente en móviles.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>preserve_topology=True asegura que los municipios vecinos no se separen ni creen huecos al simplificar.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 6 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            5. Cruces Espaciales (Spatial Join) y Limpieza con IA
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Cómo darle contexto de tus datos a la IA
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Ejecuta print(df.head(3)) y print(df.columns) en Python.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Copia esas 5 líneas de salida y pégalas en el bloque [D] Datos de tu prompt.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>La IA verá los nombres exactos de tus columnas, tildes, mayúsculas y tipos de datos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Así el script generado nunca fallará por KeyError o columnas inexistentes.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Operaciones Espaciales Automatizadas
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Cruce punto-polígono: gpd.sjoin(puntos_focos, poligonos_municipios, predicate=&#x27;within&#x27;).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Agregación estadística: contar cuántos focos de calor o predios hay por municipio.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Unión tabular (merge): unir estadísticas del DANE por código DIVIPOLA (codigo_dane).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Exportación directa del resultado enriquecido a GeoJSON.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>En lugar de hacer 10 pasos manuales en un SIG de escritorio, guardas un script reproducible.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 7 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            6. Percepción Remota Web: Comparadores Split-Map
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Qué es un Split-Map (Mapa de Cortina)?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Divide el visor con una barra vertical deslizante para comparar dos capas sincronizadas.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Aplicación 1: Antes y Después de un incendio forestal, inundación o deforestación.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Aplicación 2: Imagen Satelital Óptica RGB (izquierda) vs Índice NDVI o Relieve (derecha).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Aplicación 3: Ortofoto histórica vs Catastro multipropósito actual.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Cómo se construye con Python o JS
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>En Python: Leafmap (m.split_map(left_layer, right_layer)) o Folium DualMap.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>En HTML/JS puro: Sincronización de recorte CSS (clip: rect(...)) sobre dos TileLayers.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Permite añadir botones de salto rápido (flyTo) a zonas críticas de estudio.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Nuestro entregable comparador-satelital-split.html implementa este patrón completo.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>El Split-Map es una de las herramientas de comunicación visual más impactantes para proyectos de SELPER.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 8 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            7. Mapas de Calor (Heatmaps) de Fenómenos Espaciales
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Teoría de Densidad Kernel en el Navegador
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Transforma nubes de puntos (ej. alertas térmicas MODIS/VIIRS de FIRMS) en una superficie continua.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Cada punto aporta intensidad según un peso opcional [latitud, longitud, intensidad].</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Parámetros clave: radius (radio de influencia en píxeles), blur (suavizado) y gradient.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se recalcula dinámicamente a medida que el usuario acerca o aleja el zoom.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Cuándo usar Heatmap vs MarkerCluster
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Usa Heatmap cuando importa el patrón de concentración espacial (focos de calor, delitos, casos).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Usa MarkerCluster cuando el usuario necesita hacer clic en cada individuo para leer su ficha.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>¡Ambos pueden combinarse como capas opcionales en el mismo visor!</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>En Python se genera con folium.plugins.HeatMap(datos).add_to(mapa).</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Un buen gradiente térmico va de azul/cian (baja densidad) pasando por amarillo hasta rojo intenso (núcleo).</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 9 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            8. Ejecución del Pipeline Python del Módulo 3
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Nuestro Script procesamiento_y_mapas.py
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Lee data/muestreo_agro_campo.csv con 20 lotes agrícolas en distintas regiones de Colombia.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Valida coordenadas, redondea a 5 decimales y estructura propiedades temáticas.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Exporta automáticamente data/muestreo_agro_optimizado.geojson.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Incluye la plantilla completa de reproyección EPSG:9377 -&gt; EPSG:4326 con GeoPandas.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Cómo probarlo y adaptarlo a tus datos
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Ejecuta en terminal: python3 modulos/modulo-3-python-geodatos/procesamiento_y_mapas.py</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Reemplaza el CSV de ejemplo por una tabla propia de tu entidad o investigación.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Usa el Prompt 3.1 del Playbook para pedirle a Claude/Gemini cruces adicionales.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Conecta el GeoJSON resultante directamente a tus visores de los Módulos 2 y 4.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Este flujo separa limpiamente los datos (/data) de la visualización (/modulos).</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #F59E0B">
+              MÓDULO 3 • 2.5 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 10 / 10</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            9. Resumen y Práctica del Módulo 3
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Competencias Adquiridas
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Conversión automatizada de tablas CSV/Excel y Shapefiles a GeoJSON web.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Solución definitiva al cambio de proyección MAGNA-SIRGAS (9377) a WGS84 (4326).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Simplificación geométrica para que capas pesadas carguen en milisegundos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Construcción de comparadores satelitales Split-Map y Mapas de Calor.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #F59E0B88">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Tu Reto Práctico Autodidacta
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Abre comparador-satelital-split.html y desliza la cortina sobre el Arco Amazónico.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Prueba los botones de salto a Ciénaga Grande y Páramo de Chingaza.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Pídele a la IA agregar un cuarto botón de salto hacia tu área de estudio en Colombia.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>4. Marca el Módulo 3 como completado en el portal.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #F59E0B66">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>¡Siguiente paso: Módulo 4, donde uniremos Mapas + Gráficos Estadísticos + Geoprocesamiento en Vivo!</span>
+          </div>
+        </div>
+      </section>
+        
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1280,
+      height: 720,
+      margin: 0.06
+    });
+  </script>
+</body>
+</html>

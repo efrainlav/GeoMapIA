@@ -46,3 +46,4 @@ En **SELPER**, una de las visualizaciones más potentes para teledetección es e
 - [ ] Pídele a Claude o Gemini usando el **Prompt 3.2** que cambie una de las capas del comparador por una capa WMS de tu entidad o por un mapa de relieve sombreado (*Hillshade*).
 
 👉 **[Ir al Módulo 4: Construcción de Dashboards Geográficos (Mapa + Gráficos + Filtros)](../modulo-4-dashboards-geograficos/README.md)**
+

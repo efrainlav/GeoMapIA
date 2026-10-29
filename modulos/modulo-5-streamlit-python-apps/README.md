@@ -43,3 +43,4 @@ Aprender cuándo y cómo crear una **Web App en Python (Streamlit)** en lugar de
 - [ ] Copia el contenido de [`app_geoanalizador.py`](./app_geoanalizador.py) en Claude o Gemini y pídele: *"Agrega en la barra lateral un filtro de rango (`st.slider`) por Altitud (`altitud_msnm`) para filtrar los cultivos de alta montaña vs llanura"*.
 
 👉 **[Ir al Módulo 6: Git, GitHub y Despliegue Gratuito en la Nube](../modulo-6-github-despliegue/README.md)**
+

@@ -56,3 +56,4 @@ Para publicar la aplicación del **Módulo 5 (`app_geoanalizador.py`)**:
 1. Abre el archivo [`index.html`](../../index.html) en la raíz de este proyecto (nuestro Portal Interactivo).
 2. Usa el **Prompt 6.2** de [`PROMPT_PLAYBOOK.md`](../../PROMPT_PLAYBOOK.md) para personalizar el portal con tu nombre, tu perfil profesional de SELPER y un visor propio de tu región o proyecto.
 3. Súbelo a tu repositorio de GitHub y comparte el enlace de tu **GitHub Pages**.
+

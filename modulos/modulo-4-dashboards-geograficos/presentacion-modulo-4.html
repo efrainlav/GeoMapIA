@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Módulo 4 — Dashboards Geográficos Interactivos (Leaflet + Chart.js + Turf.js) | SELPER Colombia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+  <style>
+    body { background-color: #020617; }
+    .reveal .slides { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-family: ui-sans-serif, system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+  <!-- Barra Superior Fija con Descarga de PowerPoint (.pptx) -->
+  <header class="fixed top-0 left-0 right-0 h-12 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 flex items-center justify-between z-50 text-xs">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <span class="font-bold text-white truncate max-w-md">
+        📽️ Presentación Teórica — Módulo 4: Dashboards Geográficos Interactivos (Leaflet + Chart.js + Turf.js)
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="./presentacion-modulo-4.pptx" download class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-lg shadow transition flex items-center gap-1">
+        ⬇️ Descargar PowerPoint (.pptx)
+      </a>
+      <a href="./dashboard-riesgo-territorio.html" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-3 py-1 rounded-lg transition hidden sm:inline-block">
+        🚀 Ir al Laboratorio Práctico →
+      </a>
+    </div>
+  </header>
+
+  <div class="reveal pt-6">
+    <div class="slides">
+      
+      <section>
+        <div class="max-w-5xl mx-auto bg-slate-900/95 border-2 rounded-3xl p-10 text-left shadow-2xl" style="border-color: #A855F7">
+          <div class="inline-block text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-4" style="background: #A855F722; color: #A855F7; border: 1px solid #A855F766;">
+            🛰️ CURSO AUTODIDACTA GEOMAPIA • MÓDULO 4 • 3.0 HORAS
+          </div>
+          <h1 class="!text-3xl md:!text-5xl font-extrabold text-white leading-tight mb-4">
+            Dashboards Geográficos Interactivos (Leaflet + Chart.js + Turf.js)
+          </h1>
+          <p class="!text-base md:!text-xl text-slate-300 mb-6">
+            Diseño UI/UX con IA, sincronización bidireccional mapa-gráficos y geoprocesamiento en el navegador
+          </p>
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800 text-xs text-slate-400">
+            <span>Sociedad Latinoamericana en Percepción Remota y Sistemas de Información Espacial (<a href="https://selper.org.co/" target="_blank" class="text-sky-400 underline">SELPER Colombia</a>)</span>
+            <span class="text-slate-300 font-semibold">Usa las flechas ⬅️ ➡️ del teclado para avanzar (9 diapositivas)</span>
+          </div>
+        </div>
+      </section>
+    
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 2 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            1. De Visor Cartográfico a Dashboard de Decisión (SDSS)
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Qué diferencia a un Dashboard Geográfico?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Un visor tradicional solo muestra dónde están las cosas en el espacio.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Un Dashboard responde simultáneamente: ¿Cuántos son?, ¿Cuál es la tendencia? y ¿Dónde es crítico?</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Integra 4 componentes en una sola pantalla: Filtros + Tarjetas KPI + Mapa + Gráficos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Permite a tomadores de decisiones explorar escenarios sin depender de reportes estáticos PDF.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Aplicaciones Clave en la Comunidad SELPER
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Salas de crisis de Gestión del Riesgo (monitoreo de lluvias, caudales y alertas).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Tableros de control de deforestación y focos de calor por departamento o CAR.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Seguimiento de avance de actualización catastral multipropósito.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Monitoreo agroclimático de cultivos, humedad del suelo y vigor vegetal (NDVI).</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>El objetivo de diseño es &#x27;Zero-Scroll&#x27;: toda la información crítica visible en el 100% de la ventana (100vh).</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 3 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            2. Diseño UI/UX Profesional con IA Multimodal
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Distribución en Cuadrícula (12 Columnas)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>En Tailwind CSS dividimos la pantalla con grid-cols-12:</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>• 3 columnas izquierdas: Panel de filtros multicriterio y herramientas espaciales.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>• 6 columnas centrales: Fila superior con 4 tarjetas KPI + Mapa Leaflet amplio.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>• 3 columnas derechas: 2 gráficos estadísticos apilados (Barras + Dona/Línea).</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Técnica de Prompting Visual (Imagen a Código)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Puedes dibujar un boceto en papel o tomar captura de pantalla de un tablero referente.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Sube la imagen a Claude o Gemini junto con tu prompt.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Instrucción: &#x27;Replica exactamente esta distribución de paneles usando Tailwind CSS en modo oscuro.&#x27;</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>La IA traducirá proporciones, colores y jerarquía visual a código HTML/CSS limpio.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>El modo oscuro (bg-slate-950) reduce la fatiga visual en centros de monitoreo y resalta la simbología.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 4 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            3. Arquitectura de Sincronización Bidireccional
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                El Patrón de &#x27;Fuente Única de Verdad&#x27;
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Mantenemos en memoria el arreglo original (estacionesData) y el filtrado (datosFiltrados).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Todos los controles (select de Región, select de Alerta, slider de Precipitación) llaman a una sola función:</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>actualizarDashboard()</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Esto evita que el mapa muestre una cosa y los gráficos muestren otra distinta.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Los 4 Pasos Internos de actualizarDashboard()
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 1: Filtra el arreglo según los controles activos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 2: Recalcula sumas, promedios y máximos, y actualiza el texto de los 4 KPIs.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 3: Limpia la capa de Leaflet (clearLayers) y dibuja solo los puntos filtrados.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Paso 4: Recalcula las series por región/alerta y ejecuta chart.update() en Chart.js.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Pídele siempre a la IA: &#x27;Centraliza toda la reactividad en una única función actualizarDashboard()&#x27;.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 5 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            4. Gráficos Estadísticos Dinámicos con Chart.js
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Por qué Chart.js es ideal junto a Leaflet?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Renderiza sobre HTML5 &lt;canvas&gt; con animaciones fluidas al cambiar datos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se adapta automáticamente al tamaño del contenedor (responsive: true, maintainAspectRatio: false).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Soporta gráficos de barras, líneas temporales, donas, radar y dispersión.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se actualiza en vivo modificando chart.data.datasets[0].data y llamando a chart.update().</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Agregación de Datos en JavaScript (reduce / map)
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>La IA genera automáticamente las funciones de agrupación por categoría o región.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Ejemplo 1: Promedio de precipitación (mm) agrupado por Región Natural.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Ejemplo 2: Conteo de estaciones por Nivel de Alerta (Alta, Media, Baja).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Los colores del gráfico de dona deben coincidir exactamente con los colores del mapa.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Consistencia cartográfica: si &#x27;Alerta Alta&#x27; es rojo (#ef4444) en el mapa, debe ser rojo (#ef4444) en el gráfico.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 6 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            5. Geoprocesamiento en el Navegador con Turf.js
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                ¿Qué es Turf.js (Client-Side GIS)?
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Es un motor de análisis espacial escrito 100% en JavaScript que corre dentro del navegador.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Trabaja nativamente sobre objetos GeoJSON sin necesitar servidor PostGIS ni Python detrás.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Ejecuta buffers, intersecciones, áreas, distancias, centroides, Voronoi y conteos en milisegundos.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se carga con una sola línea CDN: @turf/turf.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Operaciones Clave implementadas en el Módulo 4
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. turf.point([lon, lat]): Crea el punto donde el usuario hizo clic en el mapa.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. turf.buffer(punto, radioKm, {units: &#x27;kilometers&#x27;}): Genera el polígono circular exacto.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. turf.pointsWithinPolygon(puntos, buffer): Filtra qué estaciones caen dentro del radio.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>4. Muestra al instante en el panel cuántas estaciones quedan afectadas y cuáles son.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Recuerda: Turf.js sigue el estándar GeoJSON, por lo que sus coordenadas se pasan en orden [Longitud, Latitud].</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 7 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            6. Caso Práctico: Análisis de Radio de Impacto en Vivo
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Flujo de Usuario en Situación de Emergencia
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Escenario: Se reporta un evento hidroclimático o incendio en una coordenada específica.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>El analista activa &#x27;📐 Buffer Espacial (Turf.js)&#x27; e ingresa un radio (ej. 180 km).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Al hacer clic en el mapa, se dibuja el área de influencia en color cian traslúcido.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>El sistema identifica automáticamente las estaciones e infraestructura dentro del anillo.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Otras Funciones de Turf.js que puedes pedir a la IA
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>turf.area(poligono): Calcula el área en m² (dividir entre 10.000 para hectáreas).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>turf.nearestPoint(puntoObjetivo, coleccionPuntos): Encuentra la estación más cercana.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>turf.bboxClip / turf.intersect: Recorta capas vectoriales en vivo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>turf.tin / turf.isolines: Interpolación espacial directamente en el cliente.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>Con Turf.js conviertes un visor pasivo en una verdadera herramienta de análisis SIG en la nube.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 8 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            7. Exportación de Reportes y Datos Filtrados (CSV)
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Por qué incluir un botón de descarga
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Después de filtrar por región, umbral de lluvia y nivel de alerta, el usuario quiere llevarse el dato.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Sin servidor backend, JavaScript puede construir un archivo CSV en memoria usando Blob.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>El archivo descargado contiene únicamente los registros que cumplen el filtro actual.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Se abre directamente en Excel o QGIS conservando sus columnas de latitud y longitud.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Código que genera la IA con un Prompt simple
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Prompt: &#x27;Agrega un botón que exporte el arreglo datosFiltradosActuales a un archivo .csv&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Usa new Blob([contenidoCSV], { type: &#x27;text/csv;charset=utf-8;&#x27; }).</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Crea un enlace temporal &lt;a&gt; con download=&#x27;reporte_filtrado_selper.csv&#x27;.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>Cierra el ciclo completo: Visualizar -&gt; Filtrar -&gt; Analizar -&gt; Exportar.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>También puedes pedirle a la IA que exporte los resultados del análisis de Turf.js en formato GeoJSON.</span>
+          </div>
+        </div>
+      </section>
+        
+      <section>
+        <div class="max-w-6xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: #A855F7">
+              MÓDULO 4 • 3.0 HORAS • TEORÍA Y FUNDAMENTOS
+            </span>
+            <span class="text-xs text-slate-400 font-mono">Diapositiva 9 / 9</span>
+          </div>
+          <h2 class="!text-2xl md:!text-3xl font-extrabold text-white mb-5">
+            8. Resumen y Práctica del Módulo 4
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-2xl p-6">
+              <h3 class="!text-base md:!text-lg font-bold text-sky-400 mb-3 border-b border-slate-800 pb-2">
+                Competencias Adquiridas
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Diseño de interfaces de Centro de Monitoreo con Tailwind CSS y Prompting Visual.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Sincronización en tiempo real entre controles, 4 KPIs, Leaflet y Chart.js.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Geoprocesamiento en el navegador (Buffers y conteo en polígono) con Turf.js.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-sky-400 font-bold">▸</span><span>Generación y descarga de reportes CSV dinámicos desde el navegador.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900/90 border rounded-2xl p-6" style="border-color: #A855F788">
+              <h3 class="!text-base md:!text-lg font-bold text-emerald-400 mb-3 border-b border-slate-800 pb-2">
+                Tu Reto Práctico Autodidacta
+              </h3>
+              <ul class="space-y-2.5 !text-xs md:!text-sm leading-relaxed list-none !ml-0">
+                <li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>1. Abre dashboard-riesgo-territorio.html y filtra por región y precipitación.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>2. Activa la casilla &#x27;Buffer Espacial (Turf.js)&#x27; y haz clic en varios puntos del mapa.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>3. Pídele a Claude/Gemini que agregue al resultado del Buffer el promedio de NDVI dentro del círculo.</span></li><li class="flex items-start gap-2 text-slate-200"><span class="text-emerald-400 font-bold">▸</span><span>4. Marca el Módulo 4 como completado en el portal.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 border rounded-xl p-4 !text-xs md:!text-sm text-slate-200 flex items-center gap-3" style="border-color: #A855F766">
+            <span class="text-amber-400 font-bold shrink-0">💡 CONCEPTO CLAVE:</span>
+            <span>¡En el Módulo 5 daremos el salto a Aplicaciones Web en Python y 3D con Streamlit y PyDeck!</span>
+          </div>
+        </div>
+      </section>
+        
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1280,
+      height: 720,
+      margin: 0.06
+    });
+  </script>
+</body>
+</html>

@@ -79,3 +79,4 @@ Antes de pasar al Módulo 2, verifica que lograste lo siguiente pidiéndoselo a 
 - [ ] **Mini-Reto:** Pídele a la IA que agregue una estación adicional en tu municipio o ciudad natal con tus propios datos y verifica que aparezca en el mapa.
 
 👉 **[Ir al Módulo 2: Creación de Visores Interactivos con HTML, JS y Leaflet](../modulo-2-visores-leaflet/README.md)**
+
