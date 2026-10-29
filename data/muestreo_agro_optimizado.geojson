@@ -1,0 +1,446 @@
+{
+  "type": "FeatureCollection",
+  "name": "muestreo_agro_optimizado",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-01",
+        "municipio": "Chinchiná",
+        "departamento": "Caldas",
+        "region": "Andina",
+        "cultivo": "Café",
+        "ndvi": 0.79,
+        "humedad_suelo_pct": 68.5,
+        "altitud_msnm": 1420,
+        "rendimiento_ton_ha": 2.4,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6053,
+          4.9825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-02",
+        "municipio": "Sevilla",
+        "departamento": "Valle del Cauca",
+        "region": "Andina",
+        "cultivo": "Café",
+        "ndvi": 0.75,
+        "humedad_suelo_pct": 64.0,
+        "altitud_msnm": 1580,
+        "rendimiento_ton_ha": 2.1,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.9361,
+          4.2689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-03",
+        "municipio": "Urrao",
+        "departamento": "Antioquia",
+        "region": "Andina",
+        "cultivo": "Aguacate Hass",
+        "ndvi": 0.82,
+        "humedad_suelo_pct": 72.1,
+        "altitud_msnm": 2050,
+        "rendimiento_ton_ha": 14.5,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.1342,
+          6.3158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-04",
+        "municipio": "Rionegro",
+        "departamento": "Antioquia",
+        "region": "Andina",
+        "cultivo": "Aguacate Hass",
+        "ndvi": 0.68,
+        "humedad_suelo_pct": 59.4,
+        "altitud_msnm": 2120,
+        "rendimiento_ton_ha": 11.2,
+        "estado_fitosanitario": "Alerta Leve"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.3737,
+          6.1552
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-05",
+        "municipio": "San Vicente de Chucurí",
+        "departamento": "Santander",
+        "region": "Andina",
+        "cultivo": "Cacao",
+        "ndvi": 0.81,
+        "humedad_suelo_pct": 74.0,
+        "altitud_msnm": 690,
+        "rendimiento_ton_ha": 1.6,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.4119,
+          6.8819
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-06",
+        "municipio": "Arauquita",
+        "departamento": "Arauca",
+        "region": "Orinoquía",
+        "cultivo": "Cacao",
+        "ndvi": 0.77,
+        "humedad_suelo_pct": 78.2,
+        "altitud_msnm": 165,
+        "rendimiento_ton_ha": 1.8,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4281,
+          7.0292
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-07",
+        "municipio": "Puerto Gaitán",
+        "departamento": "Meta",
+        "region": "Orinoquía",
+        "cultivo": "Palma de Aceite",
+        "ndvi": 0.71,
+        "humedad_suelo_pct": 61.0,
+        "altitud_msnm": 185,
+        "rendimiento_ton_ha": 22.4,
+        "estado_fitosanitario": "Alerta Leve"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.0819,
+          4.3133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-08",
+        "municipio": "Zona Bananera",
+        "departamento": "Magdalena",
+        "region": "Caribe",
+        "cultivo": "Banano",
+        "ndvi": 0.74,
+        "humedad_suelo_pct": 66.8,
+        "altitud_msnm": 35,
+        "rendimiento_ton_ha": 38.0,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.1572,
+          10.7644
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-09",
+        "municipio": "Apartadó",
+        "departamento": "Antioquia",
+        "region": "Caribe",
+        "cultivo": "Banano",
+        "ndvi": 0.83,
+        "humedad_suelo_pct": 79.5,
+        "altitud_msnm": 28,
+        "rendimiento_ton_ha": 41.2,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.6333,
+          7.8833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-10",
+        "municipio": "Espinal",
+        "departamento": "Tolima",
+        "region": "Andina",
+        "cultivo": "Arroz",
+        "ndvi": 0.64,
+        "humedad_suelo_pct": 81.0,
+        "altitud_msnm": 320,
+        "rendimiento_ton_ha": 7.1,
+        "estado_fitosanitario": "Alerta Leve"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.8842,
+          4.1486
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-11",
+        "municipio": "San Marcos",
+        "departamento": "Sucre",
+        "region": "Caribe",
+        "cultivo": "Arroz",
+        "ndvi": 0.58,
+        "humedad_suelo_pct": 88.4,
+        "altitud_msnm": 25,
+        "rendimiento_ton_ha": 5.9,
+        "estado_fitosanitario": "Estrés Hídrico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.1328,
+          8.6608
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-12",
+        "municipio": "Palmira",
+        "departamento": "Valle del Cauca",
+        "region": "Andina",
+        "cultivo": "Caña de Azúcar",
+        "ndvi": 0.76,
+        "humedad_suelo_pct": 65.2,
+        "altitud_msnm": 1001,
+        "rendimiento_ton_ha": 115.0,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.3036,
+          3.5394
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-13",
+        "municipio": "Pitalito",
+        "departamento": "Huila",
+        "region": "Andina",
+        "cultivo": "Café",
+        "ndvi": 0.84,
+        "humedad_suelo_pct": 71.0,
+        "altitud_msnm": 1318,
+        "rendimiento_ton_ha": 2.7,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.0508,
+          1.8539
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-14",
+        "municipio": "Tumaco",
+        "departamento": "Nariño",
+        "region": "Pacífico",
+        "cultivo": "Cacao",
+        "ndvi": 0.86,
+        "humedad_suelo_pct": 84.5,
+        "altitud_msnm": 12,
+        "rendimiento_ton_ha": 1.5,
+        "estado_fitosanitario": "Alerta Leve"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.7647,
+          1.8067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-15",
+        "municipio": "Villavicencio",
+        "departamento": "Meta",
+        "region": "Orinoquía",
+        "cultivo": "Arroz",
+        "ndvi": 0.69,
+        "humedad_suelo_pct": 76.3,
+        "altitud_msnm": 467,
+        "rendimiento_ton_ha": 6.8,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.6266,
+          4.142
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-16",
+        "municipio": "Ciénaga",
+        "departamento": "Magdalena",
+        "region": "Caribe",
+        "cultivo": "Palma de Aceite",
+        "ndvi": 0.62,
+        "humedad_suelo_pct": 52.1,
+        "altitud_msnm": 18,
+        "rendimiento_ton_ha": 19.5,
+        "estado_fitosanitario": "Estrés Hídrico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.2478,
+          11.0069
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-17",
+        "municipio": "Pereira",
+        "departamento": "Risaralda",
+        "region": "Andina",
+        "cultivo": "Aguacate Hass",
+        "ndvi": 0.8,
+        "humedad_suelo_pct": 70.4,
+        "altitud_msnm": 1411,
+        "rendimiento_ton_ha": 13.8,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6961,
+          4.8133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-18",
+        "municipio": "Tuluá",
+        "departamento": "Valle del Cauca",
+        "region": "Andina",
+        "cultivo": "Caña de Azúcar",
+        "ndvi": 0.73,
+        "humedad_suelo_pct": 63.7,
+        "altitud_msnm": 960,
+        "rendimiento_ton_ha": 108.5,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.1953,
+          4.0847
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-19",
+        "municipio": "Yopal",
+        "departamento": "Casanare",
+        "region": "Orinoquía",
+        "cultivo": "Arroz",
+        "ndvi": 0.67,
+        "humedad_suelo_pct": 74.9,
+        "altitud_msnm": 350,
+        "rendimiento_ton_ha": 6.5,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.3958,
+          5.3378
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id_lote": "LOT-20",
+        "municipio": "Garzón",
+        "departamento": "Huila",
+        "region": "Andina",
+        "cultivo": "Café",
+        "ndvi": 0.78,
+        "humedad_suelo_pct": 67.8,
+        "altitud_msnm": 1130,
+        "rendimiento_ton_ha": 2.3,
+        "estado_fitosanitario": "Óptimo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6278,
+          2.1961
+        ]
+      }
+    }
+  ]
+}

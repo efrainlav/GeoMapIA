@@ -1,0 +1,21 @@
+id_lote,municipio,departamento,region,cultivo,ndvi,humedad_suelo_pct,altitud_msnm,rendimiento_ton_ha,estado_fitosanitario,latitud,longitud
+LOT-01,Chinchiná,Caldas,Andina,Café,0.79,68.5,1420,2.4,Óptimo,4.9825,-75.6053
+LOT-02,Sevilla,Valle del Cauca,Andina,Café,0.75,64.0,1580,2.1,Óptimo,4.2689,-75.9361
+LOT-03,Urrao,Antioquia,Andina,Aguacate Hass,0.82,72.1,2050,14.5,Óptimo,6.3158,-76.1342
+LOT-04,Rionegro,Antioquia,Andina,Aguacate Hass,0.68,59.4,2120,11.2,Alerta Leve,6.1552,-75.3737
+LOT-05,San Vicente de Chucurí,Santander,Andina,Cacao,0.81,74.0,690,1.6,Óptimo,6.8819,-73.4119
+LOT-06,Arauquita,Arauca,Orinoquía,Cacao,0.77,78.2,165,1.8,Óptimo,7.0292,-71.4281
+LOT-07,Puerto Gaitán,Meta,Orinoquía,Palma de Aceite,0.71,61.0,185,22.4,Alerta Leve,4.3133,-72.0819
+LOT-08,Zona Bananera,Magdalena,Caribe,Banano,0.74,66.8,35,38.0,Óptimo,10.7644,-74.1572
+LOT-09,Apartadó,Antioquia,Caribe,Banano,0.83,79.5,28,41.2,Óptimo,7.8833,-76.6333
+LOT-10,Espinal,Tolima,Andina,Arroz,0.64,81.0,320,7.1,Alerta Leve,4.1486,-74.8842
+LOT-11,San Marcos,Sucre,Caribe,Arroz,0.58,88.4,25,5.9,Estrés Hídrico,8.6608,-75.1328
+LOT-12,Palmira,Valle del Cauca,Andina,Caña de Azúcar,0.76,65.2,1001,115.0,Óptimo,3.5394,-76.3036
+LOT-13,Pitalito,Huila,Andina,Café,0.84,71.0,1318,2.7,Óptimo,1.8539,-76.0508
+LOT-14,Tumaco,Nariño,Pacífico,Cacao,0.86,84.5,12,1.5,Alerta Leve,1.8067,-78.7647
+LOT-15,Villavicencio,Meta,Orinoquía,Arroz,0.69,76.3,467,6.8,Óptimo,4.1420,-73.6266
+LOT-16,Ciénaga,Magdalena,Caribe,Palma de Aceite,0.62,52.1,18,19.5,Estrés Hídrico,11.0069,-74.2478
+LOT-17,Pereira,Risaralda,Andina,Aguacate Hass,0.80,70.4,1411,13.8,Óptimo,4.8133,-75.6961
+LOT-18,Tuluá,Valle del Cauca,Andina,Caña de Azúcar,0.73,63.7,960,108.5,Óptimo,4.0847,-76.1953
+LOT-19,Yopal,Casanare,Orinoquía,Arroz,0.67,74.9,350,6.5,Óptimo,5.3378,-72.3958
+LOT-20,Garzón,Huila,Andina,Café,0.78,67.8,1130,2.3,Óptimo,2.1961,-75.6278

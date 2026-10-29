@@ -1,0 +1,151 @@
+{
+  "type": "FeatureCollection",
+  "name": "municipios_muestra_colombia",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "95001",
+        "municipio": "San José del Guaviare",
+        "departamento": "Guaviare",
+        "region": "Amazonía",
+        "uso_predominante": "Protección / Forestal",
+        "deforestacion_ha": 1850,
+        "avaluo_millones_ha": 12.5,
+        "riesgo_inundacion": "Alto",
+        "ndvi_promedio": 0.82
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-73.10, 2.25], [-72.15, 2.25], [-72.15, 2.85], [-73.10, 2.85], [-73.10, 2.25]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "18753",
+        "municipio": "San Vicente del Caguán",
+        "departamento": "Caquetá",
+        "region": "Amazonía",
+        "uso_predominante": "Agroforestal / Conservación",
+        "deforestacion_ha": 2420,
+        "avaluo_millones_ha": 14.0,
+        "riesgo_inundacion": "Medio",
+        "ndvi_promedio": 0.79
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-75.20, 1.75], [-74.30, 1.75], [-74.30, 2.55], [-75.20, 2.55], [-75.20, 1.75]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "50573",
+        "municipio": "Puerto López",
+        "departamento": "Meta",
+        "region": "Orinoquía",
+        "uso_predominante": "Agrícola Intensivo",
+        "deforestacion_ha": 410,
+        "avaluo_millones_ha": 38.0,
+        "riesgo_inundacion": "Medio",
+        "ndvi_promedio": 0.66
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-73.35, 3.80], [-72.45, 3.80], [-72.45, 4.40], [-73.35, 4.40], [-73.35, 3.80]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "70708",
+        "municipio": "San Marcos (La Mojana)",
+        "departamento": "Sucre",
+        "region": "Caribe",
+        "uso_predominante": "Humedales / Arroz / Ganadería",
+        "deforestacion_ha": 290,
+        "avaluo_millones_ha": 29.5,
+        "riesgo_inundacion": "Crítico",
+        "ndvi_promedio": 0.61
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-75.40, 8.35], [-74.80, 8.35], [-74.80, 8.95], [-75.40, 8.95], [-75.40, 8.35]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "25279",
+        "municipio": "Fómeque (Cuenca Chingaza)",
+        "departamento": "Cundinamarca",
+        "region": "Andina",
+        "uso_predominante": "Páramo / Conservación Hídrica",
+        "deforestacion_ha": 45,
+        "avaluo_millones_ha": 65.0,
+        "riesgo_inundacion": "Bajo",
+        "ndvi_promedio": 0.77
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-73.95, 4.35], [-73.55, 4.35], [-73.55, 4.75], [-73.95, 4.75], [-73.95, 4.35]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "76520",
+        "municipio": "Palmira",
+        "departamento": "Valle del Cauca",
+        "region": "Andina",
+        "uso_predominante": "Agroindustrial / Urbano",
+        "deforestacion_ha": 85,
+        "avaluo_millones_ha": 115.0,
+        "riesgo_inundacion": "Medio",
+        "ndvi_promedio": 0.71
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-76.50, 3.35], [-76.05, 3.35], [-76.05, 3.75], [-76.50, 3.75], [-76.50, 3.35]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "27001",
+        "municipio": "Quibdó (Medio Atrato)",
+        "departamento": "Chocó",
+        "region": "Pacífico",
+        "uso_predominante": "Bosque Húmedo Tropical",
+        "deforestacion_ha": 920,
+        "avaluo_millones_ha": 18.0,
+        "riesgo_inundacion": "Crítico",
+        "ndvi_promedio": 0.88
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-77.00, 5.40], [-76.35, 5.40], [-76.35, 6.05], [-77.00, 6.05], [-77.00, 5.40]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "codigo_dane": "44847",
+        "municipio": "Uribia",
+        "departamento": "La Guajira",
+        "region": "Caribe",
+        "uso_predominante": "Semiárido / Energía Eólica",
+        "deforestacion_ha": 30,
+        "avaluo_millones_ha": 9.5,
+        "riesgo_inundacion": "Bajo",
+        "ndvi_promedio": 0.21
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-72.65, 11.45], [-71.80, 11.45], [-71.80, 12.15], [-72.65, 12.15], [-72.65, 11.45]]]
+      }
+    }
+  ]
+}

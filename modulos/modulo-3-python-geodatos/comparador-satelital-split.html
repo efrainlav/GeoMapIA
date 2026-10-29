@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 3 — Comparador Satelital Split-Map y Mapa de Calor (Percepción Remota SELPER)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Leaflet Heat -->
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    #map { height: calc(100vh - 60px); width: 100%; position: relative; }
+    /* Barra divisoria de cortina satelital */
+    #splitRange {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      appearance: none;
+      background: transparent;
+      pointer-events: none;
+    }
+    #splitRange::-webkit-slider-thumb {
+      appearance: none;
+      pointer-events: auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      background: #0ea5e9;
+      border: 3px solid #ffffff;
+      cursor: ew-resize;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    #dividerLine {
+      position: absolute;
+      top: 60px;
+      bottom: 0;
+      width: 3px;
+      background: #ffffff;
+      z-index: 900;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans">
+
+  <!-- Cabecera -->
+  <header class="h-[60px] bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between z-20 relative">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg text-xs font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <div>
+        <h1 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
+          🛰️ Comparador Satelital Split-Screen + Focos de Calor FIRMS
+          <span class="bg-amber-500/20 text-amber-300 text-xs px-2 py-0.5 rounded-full border border-amber-500/40">Módulo 3</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Saltos Rápidos a Ecosistemas Estratégicos de Colombia -->
+    <div class="flex items-center gap-1.5 text-xs">
+      <span class="text-slate-400 hidden lg:inline mr-1">Saltar a zona:</span>
+      <button onclick="saltarZona(2.35, -73.45, 8)" class="bg-slate-800 hover:bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 px-2.5 py-1.5 rounded-lg font-medium">
+        🌳 Arco Amazónico (Guaviare/Caquetá)
+      </button>
+      <button onclick="saltarZona(10.86, -74.46, 10)" class="bg-slate-800 hover:bg-sky-900/60 text-sky-300 border border-sky-500/30 px-2.5 py-1.5 rounded-lg font-medium">
+        🌊 Ciénaga Grande
+      </button>
+      <button onclick="saltarZona(4.53, -73.75, 11)" class="bg-slate-800 hover:bg-indigo-900/60 text-indigo-300 border border-indigo-500/30 px-2.5 py-1.5 rounded-lg font-medium">
+        🏔️ Páramo Chingaza
+      </button>
+    </div>
+  </header>
+
+  <!-- Etiquetas de los lados del Split-Map -->
+  <div class="fixed top-20 left-4 z-[950] bg-slate-900/90 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold text-sky-300 shadow-lg">
+    ◀ IZQUIERDA: Imagen Satelital Óptica (Esri World Imagery)
+  </div>
+  <div class="fixed top-20 right-4 z-[950] bg-slate-900/90 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold text-amber-300 shadow-lg">
+    DERECHA: Topografía + Mapa de Calor de Focos Térmicos ▶
+  </div>
+
+  <!-- Línea y Control de Cortina -->
+  <div id="dividerLine" style="left: 50%;"></div>
+  <input id="splitRange" type="range" min="0" max="100" value="50" oninput="actualizarCortina()" />
+
+  <!-- Mapa -->
+  <div id="map"></div>
+
+  <!-- Panel Inferior Explicativo -->
+  <div class="fixed bottom-5 left-4 z-[950] bg-slate-900/95 border border-slate-700 rounded-xl p-3 max-w-md text-xs shadow-2xl">
+    <div class="font-bold text-white mb-1">💡 ¿Cómo funciona este visor generado con IA?</div>
+    <p class="text-slate-300 leading-relaxed">
+      Arrastra el botón circular azul del centro hacia los lados. El script sincroniza mediante CSS <code class="text-sky-400">clip</code> el mosaico satelital óptico (izquierda) frente al modelo topográfico y la densidad de alertas de calor/deforestación (derecha).
+    </p>
+  </div>
+
+  <script>
+    const map = L.map('map', {
+      center: [2.35, -73.45],
+      zoom: 8
+    });
+
+    // Capa Derecha (Fondo base): Topografía + Relieve
+    const topoRight = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenTopoMap'
+    }).addTo(map);
+
+    // Capa Izquierda (Cortina recortada dinámicamente): Satélite Esri
+    const satLeft = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '&copy; Esri World Imagery'
+    }).addTo(map);
+
+    // Focos de Calor / Alertas de Deforestación simuladas sobre el Arco Amazónico y Caribe
+    const focosCalor = [
+      [2.57, -72.64, 0.95], [2.51, -72.72, 0.90], [2.44, -72.85, 0.85],
+      [2.38, -72.91, 1.0],  [2.29, -73.05, 0.88], [2.18, -73.42, 0.92],
+      [2.11, -74.76, 1.0],  [2.05, -74.61, 0.90], [1.98, -74.50, 0.85],
+      [1.89, -74.38, 0.80], [2.62, -72.48, 0.75], [2.32, -73.85, 0.95],
+      [10.85, -74.45, 0.85], [10.79, -74.38, 0.80], [4.52, -73.76, 0.45]
+    ];
+
+    const heatLayer = L.heatLayer(focosCalor, {
+      radius: 28,
+      blur: 18,
+      maxZoom: 10,
+      gradient: { 0.3: '#38bdf8', 0.6: '#facc15', 0.85: '#f97316', 1.0: '#ef4444' }
+    }).addTo(map);
+
+    // Función que recorta la capa izquierda según la posición de la barra
+    function actualizarCortina() {
+      const rangeVal = document.getElementById('splitRange').value;
+      const divider = document.getElementById('dividerLine');
+      divider.style.left = rangeVal + '%';
+
+      const container = satLeft.getContainer();
+      if (!container) return;
+
+      const mapSize = map.getSize();
+      const nw = map.containerPointToLayerPoint([0, 0]);
+      const se = map.containerPointToLayerPoint(mapSize);
+      const clipX = nw.x + (mapSize.x * (rangeVal / 100));
+
+      container.style.clip = `rect(${nw.y}px, ${clipX}px, ${se.y}px, ${nw.x}px)`;
+    }
+
+    function saltarZona(lat, lon, zoom) {
+      map.flyTo([lat, lon], zoom, { duration: 1.3 });
+    }
+
+    map.on('move zoom resize', actualizarCortina);
+    setTimeout(actualizarCortina, 200);
+  </script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 4 — Dashboard de Gestión del Riesgo y Monitoreo Territorial (Leaflet + Chart.js + Turf.js)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Turf.js (Geoprocesamiento en el navegador) -->
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    #map { height: 100%; width: 100%; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans h-screen flex flex-col">
+
+  <!-- Barra Superior -->
+  <header class="h-14 bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between shrink-0">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg text-xs font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <h1 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
+        📊 Centro de Monitoreo Territorial y Gestión del Riesgo SELPER
+        <span class="bg-purple-500/20 text-purple-300 text-xs px-2 py-0.5 rounded-full border border-purple-500/40">Módulo 4</span>
+      </h1>
+    </div>
+    <button onclick="exportarCSV()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3.5 py-1.5 rounded-lg font-semibold shadow flex items-center gap-1.5">
+      ⬇️ Exportar Filtrados (CSV)
+    </button>
+  </header>
+
+  <!-- Layout Principal del Dashboard -->
+  <div class="flex-1 grid grid-cols-12 overflow-hidden">
+
+    <!-- Columna Izquierda: Filtros + Herramienta Espacial Turf.js (3 columnas) -->
+    <aside class="col-span-12 md:col-span-3 bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-3.5 overflow-y-auto">
+
+      <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+        <h2 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2.5">🎛️ Filtros Multicriterio</h2>
+
+        <label class="block text-xs text-slate-300 mb-1">Región Natural:</label>
+        <select id="filtroRegion" onchange="actualizarDashboard()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white mb-2.5">
+          <option value="Todas">Todas las Regiones</option>
+          <option value="Andina">Andina</option>
+          <option value="Caribe">Caribe</option>
+          <option value="Amazonía">Amazonía</option>
+          <option value="Pacífico">Pacífico</option>
+          <option value="Orinoquía">Orinoquía</option>
+        </select>
+
+        <label class="block text-xs text-slate-300 mb-1">Nivel de Alerta:</label>
+        <select id="filtroAlerta" onchange="actualizarDashboard()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white mb-2.5">
+          <option value="Todas">Todos los Niveles</option>
+          <option value="Alta">🔴 Alerta Alta</option>
+          <option value="Media">🟠 Alerta Media</option>
+          <option value="Baja">🟢 Alerta Baja</option>
+        </select>
+
+        <div class="flex justify-between text-xs text-slate-300 mb-1">
+          <span>Precipitación Mínima:</span>
+          <span id="valPrecip" class="font-mono text-sky-400">0 mm</span>
+        </div>
+        <input type="range" id="filtroPrecip" min="0" max="400" step="20" value="0" oninput="actualizarDashboard()" class="w-full accent-sky-500 cursor-pointer" />
+      </div>
+
+      <!-- Herramienta de Geoprocesamiento en el Navegador (Turf.js) -->
+      <div class="bg-slate-950/90 border border-cyan-500/40 rounded-xl p-3.5">
+        <div class="flex items-center justify-between mb-1.5">
+          <h2 class="text-xs font-bold text-cyan-400 uppercase tracking-wider">📐 Buffer Espacial (Turf.js)</h2>
+          <input type="checkbox" id="modoBuffer" class="accent-cyan-400 w-4 h-4" />
+        </div>
+        <p class="text-[11px] text-slate-400 mb-2">
+          Activa la casilla y <b>haz clic en cualquier lugar del mapa</b> para calcular un radio de afectación y contar estaciones dentro del polígono.
+        </p>
+        <div class="flex items-center justify-between text-xs mb-2">
+          <span>Radio de impacto (km):</span>
+          <input type="number" id="radioKm" value="180" min="20" max="600" step="20" class="w-20 bg-slate-800 border border-slate-700 rounded px-2 py-1 text-right text-cyan-300 font-mono text-xs" />
+        </div>
+        <div id="resultadoTurf" class="bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-xs text-slate-300">
+          Haz clic en el mapa con el modo Buffer activo para ejecutar <code class="text-cyan-400">turf.buffer</code> y <code class="text-cyan-400">turf.pointsWithinPolygon</code>.
+        </div>
+      </div>
+
+      <button onclick="resetearFiltros()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs py-2 rounded-lg border border-slate-700 transition">
+        🔄 Restablecer Vista y Filtros
+      </button>
+
+    </aside>
+
+    <!-- Columna Central: 4 KPIs Superiores + Mapa Leaflet (6 columnas) -->
+    <main class="col-span-12 md:col-span-6 flex flex-col overflow-hidden">
+
+      <!-- Fila de 4 Tarjetas KPI -->
+      <div class="grid grid-cols-4 gap-2.5 p-3 bg-slate-900/60 border-b border-slate-800 shrink-0">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-2.5">
+          <div class="text-[10px] text-slate-400 uppercase font-semibold">Estaciones Activas</div>
+          <div id="kpiTotal" class="text-xl font-extrabold text-white mt-0.5">12</div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-2.5">
+          <div class="text-[10px] text-slate-400 uppercase font-semibold">Precip. Promedio</div>
+          <div id="kpiPrecip" class="text-xl font-extrabold text-sky-400 mt-0.5">233 mm</div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-2.5">
+          <div class="text-[10px] text-slate-400 uppercase font-semibold">NDVI Medio</div>
+          <div id="kpiNdvi" class="text-xl font-extrabold text-emerald-400 mt-0.5">0.61</div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-2.5">
+          <div class="text-[10px] text-slate-400 uppercase font-semibold">Caudal Máximo</div>
+          <div id="kpiCaudal" class="text-xl font-extrabold text-amber-400 mt-0.5">1420 m³/s</div>
+        </div>
+      </div>
+
+      <!-- Mapa -->
+      <div class="flex-1 relative">
+        <div id="map"></div>
+      </div>
+
+    </main>
+
+    <!-- Columna Derecha: Gráficos Sincronizados Chart.js (3 columnas) -->
+    <section class="col-span-12 md:col-span-3 bg-slate-900 border-l border-slate-800 p-4 flex flex-col gap-4 overflow-y-auto">
+      <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex-1 flex flex-col">
+        <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2">
+          🌧️ Precipitación Media por Región (mm)
+        </h3>
+        <div class="flex-1 relative min-h-[180px]">
+          <canvas id="chartBarras"></canvas>
+        </div>
+      </div>
+
+      <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 flex-1 flex flex-col">
+        <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2">
+          🚨 Distribución por Nivel de Alerta
+        </h3>
+        <div class="flex-1 relative min-h-[180px]">
+          <canvas id="chartDona"></canvas>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Datos de Estaciones para el Dashboard
+    const estacionesData = [
+      { id: "EST-01", nombre: "Chingaza Páramo", municipio: "Fómeque", region: "Andina", ndvi: 0.78, precipitacion: 215, caudal: 42.5, alerta: "Baja", lat: 4.5321, lon: -73.7512 },
+      { id: "EST-02", nombre: "Chiribiquete Norte", municipio: "San José del Guaviare", region: "Amazonía", ndvi: 0.84, precipitacion: 310, caudal: 180.2, alerta: "Alta", lat: 2.5709, lon: -72.6419 },
+      { id: "EST-03", nombre: "Ciénaga Grande", municipio: "Pueblo Viejo", region: "Caribe", ndvi: 0.56, precipitacion: 95, caudal: 68.0, alerta: "Media", lat: 10.8615, lon: -74.4622 },
+      { id: "EST-04", nombre: "Río Atrato Medio", municipio: "Quibdó", region: "Pacífico", ndvi: 0.88, precipitacion: 640, caudal: 1420.0, alerta: "Alta", lat: 5.6947, lon: -76.6583 },
+      { id: "EST-05", nombre: "Centro Agro Palmira", municipio: "Palmira", region: "Andina", ndvi: 0.72, precipitacion: 135, caudal: 89.4, alerta: "Baja", lat: 3.5394, lon: -76.3036 },
+      { id: "EST-06", nombre: "Cuenca Río Meta", municipio: "Puerto López", region: "Orinoquía", ndvi: 0.65, precipitacion: 260, caudal: 610.0, alerta: "Media", lat: 4.0847, lon: -72.9567 },
+      { id: "EST-07", nombre: "Nevado del Ruiz", municipio: "Manizales", region: "Andina", ndvi: 0.34, precipitacion: 190, caudal: 28.1, alerta: "Media", lat: 4.8925, lon: -75.3222 },
+      { id: "EST-08", nombre: "Mojana Sucreña", municipio: "San Marcos", region: "Caribe", ndvi: 0.61, precipitacion: 295, caudal: 840.5, alerta: "Alta", lat: 8.6608, lon: -75.1328 },
+      { id: "EST-09", nombre: "Sabana de Bogotá", municipio: "Bogotá D.C.", region: "Andina", ndvi: 0.41, precipitacion: 115, caudal: 19.8, alerta: "Baja", lat: 4.6097, lon: -74.0817 },
+      { id: "EST-10", nombre: "Caguán Amazónico", municipio: "San Vicente del Caguán", region: "Amazonía", ndvi: 0.79, precipitacion: 340, caudal: 290.0, alerta: "Alta", lat: 2.1153, lon: -74.7675 },
+      { id: "EST-11", nombre: "Alta Guajira", municipio: "Uribia", region: "Caribe", ndvi: 0.19, precipitacion: 22, caudal: 1.2, alerta: "Alta", lat: 11.7147, lon: -72.2658 },
+      { id: "EST-12", nombre: "Valle de Aburrá", municipio: "Medellín", region: "Andina", ndvi: 0.52, precipitacion: 185, caudal: 54.6, alerta: "Media", lat: 6.2518, lon: -75.5636 }
+    ];
+
+    let datosFiltradosActuales = [...estacionesData];
+
+    // 1. Inicializar Mapa
+    const map = L.map('map', { center: [4.8, -74.1], zoom: 6 });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; CARTO'
+    }).addTo(map);
+
+    const capaEstaciones = L.layerGroup().addTo(map);
+    const capaBufferTurf = L.layerGroup().addTo(map);
+
+    function colorPorAlerta(alerta) {
+      if (alerta === 'Alta') return '#ef4444';
+      if (alerta === 'Media') return '#f59e0b';
+      return '#10b981';
+    }
+
+    // 2. Inicializar Gráficos Chart.js
+    const ctxBarras = document.getElementById('chartBarras').getContext('2d');
+    const chartBarras = new Chart(ctxBarras, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Precipitación Media (mm)',
+          data: [],
+          backgroundColor: '#38bdf8',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
+          y: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: '#1e293b' } }
+        }
+      }
+    });
+
+    const ctxDona = document.getElementById('chartDona').getContext('2d');
+    const chartDona = new Chart(ctxDona, {
+      type: 'doughnut',
+      data: {
+        labels: ['Alta', 'Media', 'Baja'],
+        datasets: [{
+          data: [0, 0, 0],
+          backgroundColor: ['#ef4444', '#f59e0b', '#10b981'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } }
+        }
+      }
+    });
+
+    // 3. Función Maestra de Sincronización
+    function actualizarDashboard() {
+      const reg = document.getElementById('filtroRegion').value;
+      const alr = document.getElementById('filtroAlerta').value;
+      const minP = parseInt(document.getElementById('filtroPrecip').value, 10);
+      document.getElementById('valPrecip').innerText = minP + ' mm';
+
+      datosFiltradosActuales = estacionesData.filter(d => {
+        const okReg = reg === 'Todas' || d.region === reg;
+        const okAlr = alr === 'Todas' || d.alerta === alr;
+        const okPre = d.precipitacion >= minP;
+        return okReg && okAlr && okPre;
+      });
+
+      // Actualizar KPIs
+      const n = datosFiltradosActuales.length;
+      const promPrecip = n ? Math.round(datosFiltradosActuales.reduce((a, b) => a + b.precipitacion, 0) / n) : 0;
+      const promNdvi = n ? (datosFiltradosActuales.reduce((a, b) => a + b.ndvi, 0) / n).toFixed(2) : '0.00';
+      const maxCaudal = n ? Math.max(...datosFiltradosActuales.map(d => d.caudal)) : 0;
+
+      document.getElementById('kpiTotal').innerText = n;
+      document.getElementById('kpiPrecip').innerText = promPrecip + ' mm';
+      document.getElementById('kpiNdvi').innerText = promNdvi;
+      document.getElementById('kpiCaudal').innerText = maxCaudal + ' m³/s';
+
+      // Actualizar Mapa
+      capaEstaciones.clearLayers();
+      datosFiltradosActuales.forEach(d => {
+        const m = L.circleMarker([d.lat, d.lon], {
+          radius: 9,
+          fillColor: colorPorAlerta(d.alerta),
+          color: '#ffffff',
+          weight: 2,
+          fillOpacity: 0.9
+        }).bindPopup(`
+          <div class="text-xs text-slate-900">
+            <b>${d.nombre}</b> (${d.municipio})<br>
+            Región: <b>${d.region}</b><br>
+            Precipitación: <b>${d.precipitacion} mm</b><br>
+            Caudal: <b>${d.caudal} m³/s</b> | NDVI: <b>${d.ndvi}</b>
+          </div>
+        `);
+        capaEstaciones.addLayer(m);
+      });
+
+      // Actualizar Gráfico de Barras por Región
+      const regiones = ['Andina', 'Caribe', 'Amazonía', 'Pacífico', 'Orinoquía'];
+      const promediosPorRegion = regiones.map(r => {
+        const items = datosFiltradosActuales.filter(d => d.region === r);
+        return items.length ? Math.round(items.reduce((a, b) => a + b.precipitacion, 0) / items.length) : 0;
+      });
+      chartBarras.data.labels = regiones;
+      chartBarras.data.datasets[0].data = promediosPorRegion;
+      chartBarras.update();
+
+      // Actualizar Gráfico de Dona por Alerta
+      const cAlta = datosFiltradosActuales.filter(d => d.alerta === 'Alta').length;
+      const cMedia = datosFiltradosActuales.filter(d => d.alerta === 'Media').length;
+      const cBaja = datosFiltradosActuales.filter(d => d.alerta === 'Baja').length;
+      chartDona.data.datasets[0].data = [cAlta, cMedia, cBaja];
+      chartDona.update();
+    }
+
+    // 4. Análisis Espacial en Vivo con Turf.js (Buffer + PointsWithinPolygon)
+    map.on('click', (e) => {
+      if (!document.getElementById('modoBuffer').checked) return;
+
+      capaBufferTurf.clearLayers();
+      const radioKm = parseFloat(document.getElementById('radioKm').value) || 150;
+      const pt = turf.point([e.latlng.lng, e.latlng.lat]);
+      const polyBuffer = turf.buffer(pt, radioKm, { units: 'kilometers' });
+
+      // Dibujar el polígono Turf en Leaflet
+      L.geoJSON(polyBuffer, {
+        style: { color: '#22d3ee', weight: 2, fillColor: '#06b6d4', fillOpacity: 0.22 }
+      }).addTo(capaBufferTurf);
+
+      L.circleMarker(e.latlng, { radius: 5, color: '#22d3ee', fillColor: '#ffffff', fillOpacity: 1 }).addTo(capaBufferTurf);
+
+      // Evaluar qué estaciones filtradas caen dentro del Buffer usando Turf
+      const fcPuntos = turf.featureCollection(
+        datosFiltradosActuales.map(d => turf.point([d.lon, d.lat], d))
+      );
+      const dentro = turf.pointsWithinPolygon(fcPuntos, polyBuffer);
+      const encontrados = dentro.features.map(f => f.properties);
+
+      document.getElementById('resultadoTurf').innerHTML = `
+        <div class="font-bold text-cyan-300 mb-1">🎯 Resultado en radio de ${radioKm} km:</div>
+        <div>Estaciones dentro del área: <b class="text-white">${encontrados.length}</b></div>
+        <div class="text-[11px] text-slate-400 mt-1">
+          ${encontrados.length ? encontrados.map(x => '• ' + x.nombre + ' (' + x.alerta + ')').join('<br>') : 'Ninguna estación en este radio.'}
+        </div>
+      `;
+    });
+
+    function resetearFiltros() {
+      document.getElementById('filtroRegion').value = 'Todas';
+      document.getElementById('filtroAlerta').value = 'Todas';
+      document.getElementById('filtroPrecip').value = 0;
+      document.getElementById('modoBuffer').checked = false;
+      capaBufferTurf.clearLayers();
+      map.flyTo([4.8, -74.1], 6);
+      actualizarDashboard();
+    }
+
+    function exportarCSV() {
+      const headers = ['id,nombre,municipio,region,ndvi,precipitacion_mm,caudal_m3s,alerta,lat,lon'];
+      const rows = datosFiltradosActuales.map(d =>
+        `${d.id},"${d.nombre}","${d.municipio}",${d.region},${d.ndvi},${d.precipitacion},${d.caudal},${d.alerta},${d.lat},${d.lon}`
+      );
+      const blob = new Blob([headers.concat(rows).join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'reporte_filtrado_selper.csv';
+      a.click();
+    }
+
+    actualizarDashboard();
+  </script>
+</body>
+</html>

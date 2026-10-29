@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 1 — Visor Básico de Monitoreo Ambiental SELPER</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    #map { height: calc(100vh - 64px); width: 100%; z-index: 1; }
+    .leaflet-popup-content-wrapper { border-radius: 12px; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans">
+
+  <!-- Cabecera Superior -->
+  <header class="h-16 bg-slate-900/95 border-b border-slate-700 px-4 flex items-center justify-between z-20 relative">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-700 transition">
+        ← Portal Curso
+      </a>
+      <div>
+        <h1 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
+          🛰️ Red de Estaciones Ambientales SELPER Colombia
+          <span class="bg-sky-500/20 text-sky-300 text-xs px-2 py-0.5 rounded-full border border-sky-500/40">Módulo 1</span>
+        </h1>
+        <p class="text-xs text-slate-400 hidden sm:block">Generado con el Prompt 1.1 (Framework C-T-D-E) • EPSG:4326</p>
+      </div>
+    </div>
+
+    <!-- Filtros rápidos por Nivel de Alerta -->
+    <div class="flex items-center gap-1.5">
+      <button onclick="filtrarEstaciones('Todas')" id="btn-Todas" class="filtro-btn bg-sky-600 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition">
+        Todas (<span id="count-total">12</span>)
+      </button>
+      <button onclick="filtrarEstaciones('Alta')" id="btn-Alta" class="filtro-btn bg-slate-800 hover:bg-red-900/60 text-red-300 border border-red-500/30 text-xs px-2.5 py-1.5 rounded-lg font-medium transition">
+        🔴 Alta
+      </button>
+      <button onclick="filtrarEstaciones('Media')" id="btn-Media" class="filtro-btn bg-slate-800 hover:bg-amber-900/60 text-amber-300 border border-amber-500/30 text-xs px-2.5 py-1.5 rounded-lg font-medium transition">
+        🟠 Media
+      </button>
+      <button onclick="filtrarEstaciones('Baja')" id="btn-Baja" class="filtro-btn bg-slate-800 hover:bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 text-xs px-2.5 py-1.5 rounded-lg font-medium transition">
+        🟢 Baja
+      </button>
+      <button onclick="togglePromptModal()" class="ml-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-1.5 rounded-lg font-semibold shadow transition hidden md:inline-block">
+        🤖 Ver Prompt Usado
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor del Mapa -->
+  <div id="map"></div>
+
+  <!-- Controles Flotantes Izquierdos (Vista Inicial y GPS) -->
+  <div class="fixed top-20 left-14 z-[500] flex flex-col gap-2">
+    <button onclick="vistaColombia()" class="bg-slate-900/90 hover:bg-slate-800 text-white text-xs px-3 py-2 rounded-lg shadow-lg border border-slate-700 flex items-center gap-1.5">
+      🏠 Vista Colombia
+    </button>
+    <button onclick="miUbicacion()" class="bg-slate-900/90 hover:bg-slate-800 text-sky-300 text-xs px-3 py-2 rounded-lg shadow-lg border border-slate-700 flex items-center gap-1.5">
+      📍 Mi Ubicación GPS
+    </button>
+  </div>
+
+  <!-- Leyenda Flotante -->
+  <div class="fixed bottom-6 right-4 z-[500] bg-slate-900/95 border border-slate-700 rounded-xl p-3.5 shadow-2xl text-xs w-56">
+    <h3 class="font-bold text-slate-200 mb-2 border-b border-slate-700 pb-1">Nivel de Alerta Ambiental</h3>
+    <div class="space-y-1.5">
+      <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-red-500 inline-block border border-white"></span> <span>Alerta Alta (Deforestación / Caudal)</span></div>
+      <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-amber-500 inline-block border border-white"></span> <span>Alerta Media (Monitoreo Activo)</span></div>
+      <div class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-emerald-500 inline-block border border-white"></span> <span>Alerta Baja (Condición Normal)</span></div>
+    </div>
+    <div class="mt-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
+      Haz clic en cualquier punto para inspeccionar NDVI y precipitación.
+    </div>
+  </div>
+
+  <!-- Modal con el Prompt C-T-D-E utilizado -->
+  <div id="promptModal" class="fixed inset-0 bg-black/75 z-[1000] hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-lg font-bold text-sky-400">🤖 Prompt C-T-D-E que generó este visor</h2>
+        <button onclick="togglePromptModal()" class="text-slate-400 hover:text-white text-xl">&times;</button>
+      </div>
+      <p class="text-xs text-slate-300 mb-3">Copia este prompt en Claude o Gemini para recrear o personalizar este visor:</p>
+      <pre id="promptText" class="bg-slate-950 text-emerald-300 p-4 rounded-xl text-xs overflow-x-auto whitespace-pre-wrap border border-slate-800 max-h-80">[C] Actúa como un desarrollador WebGIS Senior de SELPER Colombia.
+[T] Crea un archivo HTML único y autocontenido usando Leaflet 1.9.4 y Tailwind CSS vía CDN.
+[D] Centra el mapa en Colombia (lat 4.6097, lon -74.0817, zoom 6). Incluye 12 estaciones de monitoreo ambiental en distintas regiones de Colombia con: nombre, municipio, departamento, region, tipo, ndvi (0 a 1), precipitacion_mm, alerta ("Alta", "Media", "Baja") y coordenadas [lat, lon] en EPSG:4326.
+[E] Agrega selector de mapas base (CartoDB Dark, OpenStreetMap y Esri Satélite), marcadores circulares coloreados por nivel de alerta, botones en la cabecera para filtrar por alerta, botón de "Vista Colombia" y "Mi Ubicación GPS", popups enriquecidos y leyenda flotante.</pre>
+      <div class="mt-4 flex justify-end gap-2">
+        <button onclick="copiarPrompt()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-4 py-2 rounded-lg font-semibold">📋 Copiar Prompt</button>
+        <button onclick="togglePromptModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 py-2 rounded-lg">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Datos de Estaciones Ambientales de Colombia (EPSG:4326)
+    const estaciones = [
+      { id: "EST-01", nombre: "Estación Chingaza Páramo", municipio: "Fómeque", depto: "Cundinamarca", region: "Andina", tipo: "Hidrometeorológica", ndvi: 0.78, precipitacion: 215, alerta: "Baja", coords: [4.5321, -73.7512] },
+      { id: "EST-02", nombre: "Nodo Satelital Chiribiquete", municipio: "San José del Guaviare", depto: "Guaviare", region: "Amazonía", tipo: "Satelital / Bosque", ndvi: 0.84, precipitacion: 310, alerta: "Alta", coords: [2.5709, -72.6419] },
+      { id: "EST-03", nombre: "Estación Ciénaga Grande", municipio: "Pueblo Viejo", depto: "Magdalena", region: "Caribe", tipo: "Humedal / Manglar", ndvi: 0.56, precipitacion: 95, alerta: "Media", coords: [10.8615, -74.4622] },
+      { id: "EST-04", nombre: "Estación Río Atrato Medio", municipio: "Quibdó", depto: "Chocó", region: "Pacífico", tipo: "Hidrometeorológica", ndvi: 0.88, precipitacion: 640, alerta: "Alta", coords: [5.6947, -76.6583] },
+      { id: "EST-05", nombre: "Centro Agroclimático Palmira", municipio: "Palmira", depto: "Valle del Cauca", region: "Andina", tipo: "Agrometeorológica", ndvi: 0.72, precipitacion: 135, alerta: "Baja", coords: [3.5394, -76.3036] },
+      { id: "EST-06", nombre: "Monitoreo Cuenca Río Meta", municipio: "Puerto López", depto: "Meta", region: "Orinoquía", tipo: "Hidrológica", ndvi: 0.65, precipitacion: 260, alerta: "Media", coords: [4.0847, -72.9567] },
+      { id: "EST-07", nombre: "Observatorio Glaciar del Ruiz", municipio: "Manizales", depto: "Caldas", region: "Andina", tipo: "Alta Montaña", ndvi: 0.34, precipitacion: 190, alerta: "Media", coords: [4.8925, -75.3222] },
+      { id: "EST-08", nombre: "Estación Mojana Sucreña", municipio: "San Marcos", depto: "Sucre", region: "Caribe", tipo: "Inundaciones", ndvi: 0.61, precipitacion: 295, alerta: "Alta", coords: [8.6608, -75.1328] },
+      { id: "EST-09", nombre: "Sensor Sabana de Bogotá", municipio: "Bogotá D.C.", depto: "Bogotá D.C.", region: "Andina", tipo: "Clima Urbano", ndvi: 0.41, precipitacion: 115, alerta: "Baja", coords: [4.6097, -74.0817] },
+      { id: "EST-10", nombre: "Nodo Deforestación Caquetá", municipio: "San Vicente del Caguán", depto: "Caquetá", region: "Amazonía", tipo: "Satelital / FIRMS", ndvi: 0.79, precipitacion: 340, alerta: "Alta", coords: [2.1153, -74.7675] },
+      { id: "EST-11", nombre: "Estación Alta Guajira", municipio: "Uribia", depto: "La Guajira", region: "Caribe", tipo: "Sequía / Radiación", ndvi: 0.19, precipitacion: 22, alerta: "Alta", coords: [11.7147, -72.2658] },
+      { id: "EST-12", nombre: "Red SIATA Valle de Aburrá", municipio: "Medellín", depto: "Antioquia", region: "Andina", tipo: "Alerta Temprana", ndvi: 0.52, precipitacion: 185, alerta: "Media", coords: [6.2518, -75.5636] }
+    ];
+
+    // 2. Inicializar Mapa y Capas Base
+    const darkMap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO'
+    });
+    const osmMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    });
+    const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics'
+    });
+
+    const map = L.map('map', {
+      center: [4.6097, -74.0817],
+      zoom: 6,
+      layers: [darkMap]
+    });
+
+    L.control.layers({
+      "🌙 Modo Oscuro (CartoDB)": darkMap,
+      "🛰️ Satélite (Esri World Imagery)": esriSat,
+      "🗺️ Mapa Callejero (OSM)": osmMap
+    }, null, { position: 'topright' }).addTo(map);
+
+    L.control.scale({ metric: true, imperial: false, position: 'bottomleft' }).addTo(map);
+
+    // 3. Capa de Marcadores y Función de Color
+    const markersGroup = L.layerGroup().addTo(map);
+
+    function colorAlerta(alerta) {
+      if (alerta === 'Alta') return '#ef4444';
+      if (alerta === 'Media') return '#f59e0b';
+      return '#10b981';
+    }
+
+    function renderizarEstaciones(filtro = 'Todas') {
+      markersGroup.clearLayers();
+      const filtradas = filtro === 'Todas' ? estaciones : estaciones.filter(e => e.alerta === filtro);
+
+      filtradas.forEach(est => {
+        const marker = L.circleMarker(est.coords, {
+          radius: 9,
+          fillColor: colorAlerta(est.alerta),
+          color: '#ffffff',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.9
+        });
+
+        const popupHTML = `
+          <div class="p-1 text-slate-800 min-w-[210px]">
+            <div class="text-[10px] font-bold uppercase tracking-wider text-sky-600">${est.id} • Región ${est.region}</div>
+            <h3 class="font-bold text-sm text-slate-900 mt-0.5">${est.nombre}</h3>
+            <p class="text-xs text-slate-500 mb-2">${est.municipio}, ${est.depto}</p>
+            <table class="w-full text-xs border-t border-slate-200">
+              <tr class="border-b border-slate-100"><td class="py-1 font-semibold">Tipo:</td><td class="py-1 text-right">${est.tipo}</td></tr>
+              <tr class="border-b border-slate-100"><td class="py-1 font-semibold">Índice NDVI:</td><td class="py-1 text-right font-mono font-bold text-emerald-700">${est.ndvi.toFixed(2)}</td></tr>
+              <tr class="border-b border-slate-100"><td class="py-1 font-semibold">Precipitación:</td><td class="py-1 text-right">${est.precipitacion} mm/mes</td></tr>
+              <tr><td class="py-1 font-semibold">Nivel Alerta:</td><td class="py-1 text-right font-bold" style="color:${colorAlerta(est.alerta)}">${est.alerta}</td></tr>
+            </table>
+          </div>
+        `;
+        marker.bindPopup(popupHTML);
+        markersGroup.addLayer(marker);
+      });
+    }
+
+    function filtrarEstaciones(nivel) {
+      renderizarEstaciones(nivel);
+    }
+
+    function vistaColombia() {
+      map.flyTo([4.6097, -74.0817], 6, { duration: 1.2 });
+    }
+
+    function miUbicacion() {
+      map.locate({ setView: true, maxZoom: 13 });
+    }
+
+    map.on('locationfound', (e) => {
+      L.marker(e.latlng).addTo(map).bindPopup("📍 Estás aquí").openPopup();
+      L.circle(e.latlng, { radius: e.accuracy / 2, color: '#38bdf8' }).addTo(map);
+    });
+
+    map.on('locationerror', () => {
+      alert("No se pudo obtener tu ubicación GPS. Verifica los permisos del navegador.");
+    });
+
+    function togglePromptModal() {
+      const modal = document.getElementById('promptModal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+
+    function copiarPrompt() {
+      navigator.clipboard.writeText(document.getElementById('promptText').innerText);
+      alert("¡Prompt copiado al portapapeles! Pégalo en Claude o Gemini.");
+    }
+
+    renderizarEstaciones('Todas');
+  </script>
+</body>
+</html>

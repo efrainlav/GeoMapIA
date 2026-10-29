@@ -1,0 +1,199 @@
+{
+  "type": "FeatureCollection",
+  "name": "estaciones_monitoreo_colombia",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-001",
+        "nombre": "Estación Chingaza Páramo",
+        "municipio": "Fómeque",
+        "departamento": "Cundinamarca",
+        "region": "Andina",
+        "tipo": "Hidrometeorológica",
+        "ndvi": 0.78,
+        "precipitacion_mm": 215,
+        "caudal_m3s": 42.5,
+        "alerta": "Baja"
+      },
+      "geometry": { "type": "Point", "coordinates": [-73.7512, 4.5321] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-002",
+        "nombre": "Nodo Satelital Chiribiquete Norte",
+        "municipio": "San José del Guaviare",
+        "departamento": "Guaviare",
+        "region": "Amazonía",
+        "tipo": "Satelital / Deforestación",
+        "ndvi": 0.84,
+        "precipitacion_mm": 310,
+        "caudal_m3s": 180.2,
+        "alerta": "Alta"
+      },
+      "geometry": { "type": "Point", "coordinates": [-72.6419, 2.5709] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-003",
+        "nombre": "Estación Ciénaga Grande",
+        "municipio": "Pueblo Viejo",
+        "departamento": "Magdalena",
+        "region": "Caribe",
+        "tipo": "Calidad de Agua / Manglar",
+        "ndvi": 0.56,
+        "precipitacion_mm": 95,
+        "caudal_m3s": 68.0,
+        "alerta": "Media"
+      },
+      "geometry": { "type": "Point", "coordinates": [-74.4622, 10.8615] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-004",
+        "nombre": "Estación Río Atrato Medio",
+        "municipio": "Quibdó",
+        "departamento": "Chocó",
+        "region": "Pacífico",
+        "tipo": "Hidrometeorológica",
+        "ndvi": 0.88,
+        "precipitacion_mm": 640,
+        "caudal_m3s": 1420.0,
+        "alerta": "Alta"
+      },
+      "geometry": { "type": "Point", "coordinates": [-76.6583, 5.6947] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-005",
+        "nombre": "Centro Agroclimático Valle del Cauca",
+        "municipio": "Palmira",
+        "departamento": "Valle del Cauca",
+        "region": "Andina",
+        "tipo": "Agrometeorológica",
+        "ndvi": 0.72,
+        "precipitacion_mm": 135,
+        "caudal_m3s": 89.4,
+        "alerta": "Baja"
+      },
+      "geometry": { "type": "Point", "coordinates": [-76.3036, 3.5394] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-006",
+        "nombre": "Monitoreo Cuenca Río Meta",
+        "municipio": "Puerto López",
+        "departamento": "Meta",
+        "region": "Orinoquía",
+        "tipo": "Hidrometeorológica",
+        "ndvi": 0.65,
+        "precipitacion_mm": 260,
+        "caudal_m3s": 610.0,
+        "alerta": "Media"
+      },
+      "geometry": { "type": "Point", "coordinates": [-72.9567, 4.0847] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-007",
+        "nombre": "Observatorio Volcánico y Glaciar Ruiz",
+        "municipio": "Manizales",
+        "departamento": "Caldas",
+        "region": "Andina",
+        "tipo": "Riesgo Geológico / Nieve",
+        "ndvi": 0.34,
+        "precipitacion_mm": 190,
+        "caudal_m3s": 28.1,
+        "alerta": "Media"
+      },
+      "geometry": { "type": "Point", "coordinates": [-75.3222, 4.8925] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-008",
+        "nombre": "Estación Mojana Sucreña",
+        "municipio": "San Marcos",
+        "departamento": "Sucre",
+        "region": "Caribe",
+        "tipo": "Inundaciones / Humedales",
+        "ndvi": 0.61,
+        "precipitacion_mm": 295,
+        "caudal_m3s": 840.5,
+        "alerta": "Alta"
+      },
+      "geometry": { "type": "Point", "coordinates": [-75.1328, 8.6608] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-009",
+        "nombre": "Sensor Sabana de Bogotá",
+        "municipio": "Bogotá D.C.",
+        "departamento": "Bogotá D.C.",
+        "region": "Andina",
+        "tipo": "Clima Urbano / Calidad Aire",
+        "ndvi": 0.41,
+        "precipitacion_mm": 115,
+        "caudal_m3s": 19.8,
+        "alerta": "Baja"
+      },
+      "geometry": { "type": "Point", "coordinates": [-74.0817, 4.6097] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-010",
+        "nombre": "Nodo Deforestación Caquetá",
+        "municipio": "San Vicente del Caguán",
+        "departamento": "Caquetá",
+        "region": "Amazonía",
+        "tipo": "Satelital / Deforestación",
+        "ndvi": 0.79,
+        "precipitacion_mm": 340,
+        "caudal_m3s": 290.0,
+        "alerta": "Alta"
+      },
+      "geometry": { "type": "Point", "coordinates": [-74.7675, 2.1153] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-011",
+        "nombre": "Estación Alta Guajira",
+        "municipio": "Uribia",
+        "departamento": "La Guajira",
+        "region": "Caribe",
+        "tipo": "Sequía / Radiación Solar",
+        "ndvi": 0.19,
+        "precipitacion_mm": 22,
+        "caudal_m3s": 1.2,
+        "alerta": "Alta"
+      },
+      "geometry": { "type": "Point", "coordinates": [-72.2658, 11.7147] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "EST-012",
+        "nombre": "Estación Valle de Aburrá",
+        "municipio": "Medellín",
+        "departamento": "Antioquia",
+        "region": "Andina",
+        "tipo": "Alerta Temprana SIATA",
+        "ndvi": 0.52,
+        "precipitacion_mm": 185,
+        "caudal_m3s": 54.6,
+        "alerta": "Media"
+      },
+      "geometry": { "type": "Point", "coordinates": [-75.5636, 6.2518] }
+    }
+  ]
+}

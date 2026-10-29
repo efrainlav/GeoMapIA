@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo 2 — Visor Catastral, Ordenamiento y Monitoreo Ambiental (Leaflet)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet & MarkerCluster -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    #map { height: 100%; width: 100%; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans flex flex-col h-screen">
+
+  <!-- Barra Superior -->
+  <header class="h-14 bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between shrink-0">
+    <div class="flex items-center gap-3">
+      <a href="../../index.html" class="bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1 rounded-lg text-xs font-semibold border border-slate-700">
+        ← Portal Curso
+      </a>
+      <h1 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
+        🗺️ Visor Multipropósito: Catastro, Uso del Suelo y Deforestación
+        <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2 py-0.5 rounded-full border border-emerald-500/40">Módulo 2</span>
+      </h1>
+    </div>
+    <div class="text-xs text-slate-400 hidden md:block">
+      Coropletas Dinámicas + MarkerCluster + Control de Opacidad WMS/Satelital
+    </div>
+  </header>
+
+  <!-- Cuerpo Principal: Barra Lateral + Mapa -->
+  <div class="flex-1 flex overflow-hidden">
+
+    <!-- Panel Lateral Izquierdo -->
+    <aside class="w-80 bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-4 overflow-y-auto shrink-0">
+
+      <!-- 1. Selector de Variable Coroplética -->
+      <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5">
+        <label class="block text-xs font-bold text-sky-400 uppercase tracking-wider mb-1.5">
+          1. Variable Coroplética (Polígonos)
+        </label>
+        <select id="variableSelect" onchange="actualizarCoropleta()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-500">
+          <option value="deforestacion_ha">🌳 Deforestación Anual (ha)</option>
+          <option value="avaluo_millones_ha">🏘️ Avalúo Catastral Rural (M$ COP / ha)</option>
+          <option value="ndvi_promedio">🛰️ Índice Satelital NDVI Promedio</option>
+        </select>
+        <p class="text-[11px] text-slate-400 mt-1.5">
+          Pasa el cursor sobre un polígono para inspeccionar sus atributos o haz clic para acercar.
+        </p>
+      </div>
+
+      <!-- 2. Control de Capa Satelital / WMS y Opacidad -->
+      <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5">
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-xs font-bold text-amber-400 uppercase tracking-wider">
+            2. Superposición Satelital / WMS
+          </label>
+          <input type="checkbox" id="toggleOverlay" checked onchange="toggleCapaSuperpuesta()" class="accent-amber-500 w-4 h-4" />
+        </div>
+        <div class="text-xs text-slate-300 mb-1 flex justify-between">
+          <span>Opacidad Mosaico Satelital:</span>
+          <span id="opacityVal" class="font-mono text-amber-300">45%</span>
+        </div>
+        <input type="range" id="opacitySlider" min="0" max="1" step="0.05" value="0.45" oninput="cambiarOpacidad(this.value)" class="w-full accent-amber-500 cursor-pointer" />
+      </div>
+
+      <!-- 3. Buscador y Filtro por Región -->
+      <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5">
+        <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">
+          3. Filtrar por Región / Municipio
+        </label>
+        <input type="text" id="searchInput" oninput="filtrarMunicipios()" placeholder="Buscar municipio o uso (ej. Páramo, Guaviare)..." class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white mb-2 focus:outline-none focus:border-emerald-500" />
+        <select id="regionFilter" onchange="filtrarMunicipios()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+          <option value="Todas">🌎 Todas las Regiones</option>
+          <option value="Amazonía">Amazonía</option>
+          <option value="Andina">Andina</option>
+          <option value="Caribe">Caribe</option>
+          <option value="Orinoquía">Orinoquía</option>
+          <option value="Pacífico">Pacífico</option>
+        </select>
+      </div>
+
+      <!-- 4. Inspector en Vivo (Hover) -->
+      <div class="bg-slate-950 border border-sky-500/30 rounded-xl p-3.5 flex-1">
+        <h3 class="text-xs font-bold text-sky-300 uppercase tracking-wider mb-2">
+          🔍 Inspector Predial / Territorial
+        </h3>
+        <div id="infoPanel" class="text-xs text-slate-300 space-y-1.5">
+          <p class="text-slate-400 italic">Pasa el mouse sobre cualquier polígono del mapa para ver su ficha catastral y ambiental en tiempo real.</p>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Contenedor del Mapa -->
+    <main class="flex-1 relative">
+      <div id="map"></div>
+
+      <!-- Leyenda Dinámica Flotante -->
+      <div id="legendBox" class="absolute bottom-6 right-4 z-[500] bg-slate-900/95 border border-slate-700 rounded-xl p-3.5 shadow-2xl text-xs w-60">
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    // Datos GeoJSON de Municipios / Unidades Territoriales de Muestra en Colombia
+    const datosMunicipios = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "95001", "municipio": "San José del Guaviare", "departamento": "Guaviare", "region": "Amazonía", "uso_predominante": "Protección / Forestal", "deforestacion_ha": 1850, "avaluo_millones_ha": 12.5, "riesgo_inundacion": "Alto", "ndvi_promedio": 0.82 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-73.10, 2.25], [-72.15, 2.25], [-72.15, 2.85], [-73.10, 2.85], [-73.10, 2.25]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "18753", "municipio": "San Vicente del Caguán", "departamento": "Caquetá", "region": "Amazonía", "uso_predominante": "Agroforestal / Conservación", "deforestacion_ha": 2420, "avaluo_millones_ha": 14.0, "riesgo_inundacion": "Medio", "ndvi_promedio": 0.79 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-75.20, 1.75], [-74.30, 1.75], [-74.30, 2.55], [-75.20, 2.55], [-75.20, 1.75]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "50573", "municipio": "Puerto López", "departamento": "Meta", "region": "Orinoquía", "uso_predominante": "Agrícola Intensivo", "deforestacion_ha": 410, "avaluo_millones_ha": 38.0, "riesgo_inundacion": "Medio", "ndvi_promedio": 0.66 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-73.35, 3.80], [-72.45, 3.80], [-72.45, 4.40], [-73.35, 4.40], [-73.35, 3.80]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "70708", "municipio": "San Marcos (La Mojana)", "departamento": "Sucre", "region": "Caribe", "uso_predominante": "Humedales / Arroz", "deforestacion_ha": 290, "avaluo_millones_ha": 29.5, "riesgo_inundacion": "Crítico", "ndvi_promedio": 0.61 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-75.40, 8.35], [-74.80, 8.35], [-74.80, 8.95], [-75.40, 8.95], [-75.40, 8.35]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "25279", "municipio": "Fómeque (Chingaza)", "departamento": "Cundinamarca", "region": "Andina", "uso_predominante": "Páramo / Conservación Hídrica", "deforestacion_ha": 45, "avaluo_millones_ha": 65.0, "riesgo_inundacion": "Bajo", "ndvi_promedio": 0.77 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-73.95, 4.35], [-73.55, 4.35], [-73.55, 4.75], [-73.95, 4.75], [-73.95, 4.35]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "76520", "municipio": "Palmira", "departamento": "Valle del Cauca", "region": "Andina", "uso_predominante": "Agroindustrial / Urbano", "deforestacion_ha": 85, "avaluo_millones_ha": 115.0, "riesgo_inundacion": "Medio", "ndvi_promedio": 0.71 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-76.50, 3.35], [-76.05, 3.35], [-76.05, 3.75], [-76.50, 3.75], [-76.50, 3.35]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "27001", "municipio": "Quibdó (Medio Atrato)", "departamento": "Chocó", "region": "Pacífico", "uso_predominante": "Bosque Húmedo Tropical", "deforestacion_ha": 920, "avaluo_millones_ha": 18.0, "riesgo_inundacion": "Crítico", "ndvi_promedio": 0.88 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-77.00, 5.40], [-76.35, 5.40], [-76.35, 6.05], [-77.00, 6.05], [-77.00, 5.40]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "codigo_dane": "44847", "municipio": "Uribia", "departamento": "La Guajira", "region": "Caribe", "uso_predominante": "Semiárido / Energía Eólica", "deforestacion_ha": 30, "avaluo_millones_ha": 9.5, "riesgo_inundacion": "Bajo", "ndvi_promedio": 0.21 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-72.65, 11.45], [-71.80, 11.45], [-71.80, 12.15], [-72.65, 12.15], [-72.65, 11.45]]] }
+        }
+      ]
+    };
+
+    // Puntos de Focos / Predios para demostrar MarkerCluster
+    const puntosCluster = [
+      { nombre: "Predio Rural El Vergel", tipo: "Catastro Multipropósito", coords: [2.52, -72.61] },
+      { nombre: "Foco Térmico FIRMS #102", tipo: "Alerta Deforestación", coords: [2.41, -72.78] },
+      { nombre: "Foco Térmico FIRMS #108", tipo: "Alerta Deforestación", coords: [2.15, -74.65] },
+      { nombre: "Reserva Natural Caguán", tipo: "Área Protegida", coords: [2.05, -74.82] },
+      { nombre: "Distrito de Riego Palmira", tipo: "Catastro Agroindustrial", coords: [3.54, -76.29] },
+      { nombre: "Unidad Agrícola Puerto López", tipo: "Titulación Rural", coords: [4.09, -72.95] },
+      { nombre: "Estación Limnimétrica San Marcos", tipo: "Monitoreo Mojana", coords: [8.66, -75.13] },
+      { nombre: "Páramo de Chingaza Sector 1", tipo: "Conservación", coords: [4.55, -73.75] },
+      { nombre: "Parque Eólico Jepírachi", tipo: "Infraestructura", coords: [11.82, -72.05] }
+    ];
+
+    // 1. Inicializar Mapa
+    const darkBase = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; CARTO'
+    });
+    const osmBase = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+    });
+
+    // Capa Satelital Superpuesta con Opacidad Ajustable
+    const satOverlay = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      opacity: 0.45,
+      attribution: '&copy; Esri World Imagery'
+    });
+
+    const map = L.map('map', {
+      center: [5.2, -74.2],
+      zoom: 6,
+      layers: [darkBase, satOverlay]
+    });
+
+    // 2. Agrupación de Puntos con MarkerCluster
+    const clusterGroup = L.markerClusterGroup();
+    puntosCluster.forEach(p => {
+      const m = L.marker(p.coords).bindPopup(`<b>${p.nombre}</b><br><span class="text-xs text-slate-600">${p.tipo}</span>`);
+      clusterGroup.addLayer(m);
+    });
+    map.addLayer(clusterGroup);
+
+    L.control.layers(
+      { "🌙 Mapa Base Oscuro": darkBase, "🗺️ OpenStreetMap": osmBase },
+      { "🛰️ Mosaico Satelital": satOverlay, "📍 Puntos Agrupados (Cluster)": clusterGroup },
+      { position: 'topright' }
+    ).addTo(map);
+
+    // 3. Funciones de Color según la Variable Seleccionada
+    function obtenerColor(valor, variable) {
+      if (variable === 'deforestacion_ha') {
+        return valor > 1500 ? '#991b1b' :
+               valor > 800  ? '#dc2626' :
+               valor > 300  ? '#f97316' :
+               valor > 100  ? '#facc15' : '#22c55e';
+      } else if (variable === 'avaluo_millones_ha') {
+        return valor > 80 ? '#312e81' :
+               valor > 50 ? '#4f46e5' :
+               valor > 25 ? '#0284c7' :
+               valor > 15 ? '#38bdf8' : '#bae6fd';
+      } else {
+        // ndvi_promedio
+        return valor > 0.80 ? '#065f46' :
+               valor > 0.70 ? '#10b981' :
+               valor > 0.55 ? '#84cc16' :
+               valor > 0.35 ? '#eab308' : '#d97706';
+      }
+    }
+
+    let capaGeoJSON = null;
+
+    function dibujarPoligonos() {
+      if (capaGeoJSON) map.removeLayer(capaGeoJSON);
+
+      const variable = document.getElementById('variableSelect').value;
+      const textoBusqueda = document.getElementById('searchInput').value.toLowerCase();
+      const regionSel = document.getElementById('regionFilter').value;
+
+      capaGeoJSON = L.geoJSON(datosMunicipios, {
+        filter: (feature) => {
+          const p = feature.properties;
+          const coincideTexto = p.municipio.toLowerCase().includes(textoBusqueda) ||
+                                p.uso_predominante.toLowerCase().includes(textoBusqueda) ||
+                                p.departamento.toLowerCase().includes(textoBusqueda);
+          const coincideRegion = regionSel === 'Todas' || p.region === regionSel;
+          return coincideTexto && coincideRegion;
+        },
+        style: (feature) => {
+          const valor = feature.properties[variable];
+          return {
+            fillColor: obtenerColor(valor, variable),
+            weight: 2,
+            opacity: 1,
+            color: '#e2e8f0',
+            fillOpacity: 0.72
+          };
+        },
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties;
+          layer.on({
+            mouseover: (e) => {
+              const l = e.target;
+              l.setStyle({ weight: 4, color: '#38bdf8', fillOpacity: 0.9 });
+              document.getElementById('infoPanel').innerHTML = `
+                <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                  <div class="text-[10px] text-sky-400 font-bold">DANE ${p.codigo_dane} • ${p.region}</div>
+                  <div class="text-sm font-bold text-white">${p.municipio} (${p.departamento})</div>
+                  <div class="text-xs text-slate-400 mb-2">${p.uso_predominante}</div>
+                  <div class="grid grid-cols-2 gap-1.5 text-[11px] border-t border-slate-800 pt-2">
+                    <div>🌳 Deforestación:</div><div class="text-right font-bold text-red-400">${p.deforestacion_ha} ha</div>
+                    <div>🏘️ Avalúo Rural:</div><div class="text-right font-bold text-sky-300">$${p.avaluo_millones_ha} M/ha</div>
+                    <div>🛰️ NDVI Medio:</div><div class="text-right font-bold text-emerald-400">${p.ndvi_promedio}</div>
+                    <div>⚠️ Riesgo Inund.:</div><div class="text-right font-bold text-amber-300">${p.riesgo_inundacion}</div>
+                  </div>
+                </div>
+              `;
+            },
+            mouseout: (e) => {
+              capaGeoJSON.resetStyle(e.target);
+            },
+            click: (e) => {
+              map.fitBounds(e.target.getBounds(), { padding: [40, 40] });
+            }
+          });
+        }
+      }).addTo(map);
+
+      actualizarLeyenda(variable);
+    }
+
+    function actualizarLeyenda(variable) {
+      const box = document.getElementById('legendBox');
+      let titulo = '';
+      let items = [];
+
+      if (variable === 'deforestacion_ha') {
+        titulo = '🌳 Deforestación Anual (ha)';
+        items = [
+          { color: '#991b1b', label: '> 1,500 ha (Crítica)' },
+          { color: '#dc2626', label: '800 – 1,500 ha' },
+          { color: '#f97316', label: '300 – 800 ha' },
+          { color: '#facc15', label: '100 – 300 ha' },
+          { color: '#22c55e', label: '< 100 ha (Baja)' }
+        ];
+      } else if (variable === 'avaluo_millones_ha') {
+        titulo = '🏘️ Avalúo Catastral (M$ COP/ha)';
+        items = [
+          { color: '#312e81', label: '> $80 Millones / ha' },
+          { color: '#4f46e5', label: '$50 – $80 Millones / ha' },
+          { color: '#0284c7', label: '$25 – $50 Millones / ha' },
+          { color: '#38bdf8', label: '$15 – $25 Millones / ha' },
+          { color: '#bae6fd', label: '< $15 Millones / ha' }
+        ];
+      } else {
+        titulo = '🛰️ Vigor Vegetal (NDVI)';
+        items = [
+          { color: '#065f46', label: '> 0.80 (Bosque Denso)' },
+          { color: '#10b981', label: '0.70 – 0.80 (Vegetación Alta)' },
+          { color: '#84cc16', label: '0.55 – 0.70 (Cultivos/Pastos)' },
+          { color: '#eab308', label: '0.35 – 0.55 (Transición)' },
+          { color: '#d97706', label: '< 0.35 (Suelo Desnudo/Árido)' }
+        ];
+      }
+
+      box.innerHTML = `
+        <h4 class="font-bold text-slate-100 mb-2 border-b border-slate-700 pb-1">${titulo}</h4>
+        <div class="space-y-1.5">
+          ${items.map(i => `<div class="flex items-center gap-2"><span class="w-4 h-3 rounded inline-block border border-white/40" style="background:${i.color}"></span><span>${i.label}</span></div>`).join('')}
+        </div>
+      `;
+    }
+
+    function actualizarCoropleta() { dibujarPoligonos(); }
+    function filtrarMunicipios() { dibujarPoligonos(); }
+
+    function cambiarOpacidad(val) {
+      satOverlay.setOpacity(parseFloat(val));
+      document.getElementById('opacityVal').innerText = Math.round(val * 100) + '%';
+    }
+
+    function toggleCapaSuperpuesta() {
+      const checked = document.getElementById('toggleOverlay').checked;
+      if (checked) {
+        map.addLayer(satOverlay);
+      } else {
+        map.removeLayer(satOverlay);
+      }
+    }
+
+    dibujarPoligonos();
+  </script>
+</body>
+</html>
